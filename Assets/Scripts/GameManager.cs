@@ -19,5 +19,7 @@ public class GameManager : MonoBehaviour
         {
             gameManager = this;
         }
+        InventoryManager.Instance.ListItems();
+
     }
 }

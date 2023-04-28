@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthManager
+
+[System.Serializable]
+public abstract class HealthManager : MonoBehaviour
 {
+    [Header("Health")]
     public float _currentHealth;
     public float _currentMaxHealth;
 
@@ -41,18 +44,31 @@ public class HealthManager
             }
     }
 
-    public void Damage(float damageAmount)
+    public virtual void Update()
+    {
+        if (_currentHealth < 0)
+        {
+            _currentHealth = 0;
+        }
+        if (_currentHealth > _currentMaxHealth)
+        {
+            _currentHealth = _currentMaxHealth;
+        }
+    }
+
+    public virtual void Damage(float damageAmount)
     {
         if (_currentHealth > 0)
         {
             _currentHealth -= damageAmount;
         }
-        if (_currentHealth < 0)
+        if (_currentHealth <= 0)
         {
             _currentHealth = 0;
+            OnDeath();
         }
     }
-    public void Heal(float healAmount)
+    public virtual void Heal(float healAmount)
     {
         if (_currentHealth < _currentMaxHealth)
         {
@@ -62,6 +78,11 @@ public class HealthManager
         {
             _currentHealth = _currentMaxHealth;
         }
+    }
+
+    public virtual void OnDeath()
+    {
+        Destroy(gameObject);
     }
 
 }

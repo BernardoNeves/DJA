@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
+[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
 public class ItemData : ScriptableObject
 {
 
     [Header("Info")]
-    public int id;
-    public new string itemName;
+    public string itemName;
     public Sprite itemIcon;
-    public Mesh itemMesh;
-    public int dropChance;
+    public int itemDropChance;
+    public int itemStacks;
 }

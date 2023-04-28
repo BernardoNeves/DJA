@@ -7,12 +7,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] private Transform PlayerCamera;
 
+
+    private void Start()
+    {
+
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)) {
             Interact();
         }
     }
+    
 
     public void Interact() {
 

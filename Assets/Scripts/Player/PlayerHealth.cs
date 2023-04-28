@@ -2,47 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, HealthInterface
+public class PlayerHealth : HealthManager, HealthInterface
 {
-    [Header("Health")]
-    public float _initialHealth;
-    public float _initialMaxHealth;
-
     [SerializeField] Healthbar _healthbar;
 
+    public List<ItemStack> itemList = new List<ItemStack>();
 
-    void Start()
+    public PlayerHealth(float health, float maxHealth) : base(health, maxHealth)
     {
-        GameManager.gameManager._playerHealth.Health = _initialHealth;
-        GameManager.gameManager._playerHealth.MaxHealth = _initialMaxHealth;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            Damage(20);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift)){
-            Heal(20);
-        }
-    }
-
-    public void Damage(float dmg)
-    {
-        GameManager.gameManager._playerHealth.Damage(dmg);
-        Debug.Log(GameManager.gameManager._playerHealth.Health);
-        if (GameManager.gameManager._playerHealth.Health <= 0)
+        _currentHealth = health;
+        _currentMaxHealth = maxHealth;
+        if (_currentHealth > _currentMaxHealth)
         {
-            // KILL PLAYER
+            _currentHealth = _currentMaxHealth;
         }
-
-        _healthbar.SetHealth(GameManager.gameManager._playerHealth.Health);
     }
-    public void Heal(float heal)
+    private void Start()
     {
-        GameManager.gameManager._playerHealth.Heal(heal);
-        Debug.Log(GameManager.gameManager._playerHealth.Health);
+        StartCoroutine(CallItemUpdate());
+    }
 
-        _healthbar.SetHealth(GameManager.gameManager._playerHealth.Health);
+    public override void Update()
+    {
+        base.Update();
+        _healthbar.SetHealth(Health);
+    }
+    public override void OnDeath()
+    {
+        Debug.Log("Dead");
+        Application.Quit(); // Application.LoadLevel(DeathScreen);
+    }
+
+    IEnumerator CallItemUpdate()
+    {
+        foreach (ItemStack i in itemList)
+        {
+            i.Item.Update(this, i.Stacks);
+        }
+        yield return new WaitForSeconds(1);
+        StartCoroutine(CallItemUpdate());
     }
 }

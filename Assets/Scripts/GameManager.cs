@@ -5,19 +5,39 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager gameManager { get; private set; }
+    public static GameManager instance { get; private set; }
 
-    public HealthManager _playerHealth = new HealthManager(100, 100);
+    public GameObject _player;
+
+    public GameObject Player
+    {
+        get
+        {
+            return _player;
+        }
+        set
+        {
+            _player = value;
+        }
+    }
+
+    public PlayerHealth PlayerHeallth
+    {
+        get
+        {
+            return _player.GetComponent<PlayerHealth>();
+        }
+    }
 
     void Awake()
     {
-        if (gameManager != null && gameManager != this)
+        if (instance != null && instance != this)
         {
             Destroy(this);
         }
         else
         {
-            gameManager = this;
+            instance = this;
         }
         InventoryManager.Instance.ListItems();
 

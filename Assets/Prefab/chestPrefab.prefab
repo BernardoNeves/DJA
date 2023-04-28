@@ -123,8 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b481b84eb946bfc478870e6bba612d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropPrefab: {fileID: 3380791706900491975, guid: fb8155865f6317248957b4b569d0d798, type: 3}
+  dropPrefab: {fileID: 3896947069321208781, guid: 832d44f1bfe3c2b40960743650021bc5, type: 3}
   Drops:
-  - {fileID: 11400000, guid: 274e2f6f666eb5942b29adafff811c44, type: 2}
   - {fileID: 11400000, guid: 4c9434d459796cf4d8dadc9647de9d50, type: 2}
-  - {fileID: 11400000, guid: 8f0e96b47985f7a4e98c4ec135ab7410, type: 2}

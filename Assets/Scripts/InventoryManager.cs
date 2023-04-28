@@ -38,9 +38,11 @@ public class InventoryManager : MonoBehaviour
             GameObject obj = Instantiate(ItemPrefab, ItemContent);
             var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+            var itemStacks = obj.transform.Find("ItemStacks").GetComponent<Text>();
 
             itemName.text = item.itemName;
             itemIcon.sprite = item.itemIcon;
+            itemStacks.text = item.itemStacks.ToString();
         }
     }
 

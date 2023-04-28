@@ -2,39 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, HealthInterface
+public class EnemyHealth : HealthManager, HealthInterface
 {
     public GameObject chestPrefab;
 
-
-    [Header("Health")]
-    public float _initialHealth;
-    public float _initialMaxHealth;
-
-    public HealthManager _enemyHealth;
-
-    void Start()
+    public EnemyHealth(float health, float maxHealth) : base(health, maxHealth)
     {
-        _enemyHealth = new HealthManager(_initialHealth, _initialMaxHealth);
-    }
-
-    void Update()
-    {
-        if (_enemyHealth.Health <= 0)
+        _currentHealth = health;
+        _currentMaxHealth = maxHealth;
+        if (_currentHealth > _currentMaxHealth)
         {
-            GameObject chest = Instantiate(chestPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            _currentHealth = _currentMaxHealth;
         }
     }
-    
-    public void Damage(float dmg)
+
+    public override void Heal(float healAmount)
     {
-        _enemyHealth.Damage(dmg);
-        Debug.Log(_enemyHealth.Health);
+        base.Heal(healAmount);
+        Debug.Log(Health);
     }
-    public void Heal(float heal)
+
+    public override void Damage(float damageAmount)
     {
-        _enemyHealth.Heal(heal);
-        Debug.Log(_enemyHealth.Health);
+        base.Damage(damageAmount);
+        Debug.Log(Health);
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        GameObject chest = Instantiate(chestPrefab, transform.position, Quaternion.identity);
     }
 }

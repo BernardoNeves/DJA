@@ -26,11 +26,13 @@ public class PlayerHealth : HealthManager, HealthInterface
     {
         base.Update();
         _healthbar.SetHealth(Health);
+        _healthbar.SetMaxHealth(MaxHealth);
+
     }
+
     public override void OnDeath()
     {
         Debug.Log("Dead");
-        Application.Quit(); // Application.LoadLevel(DeathScreen);
     }
 
     IEnumerator CallItemUpdate()
@@ -41,5 +43,21 @@ public class PlayerHealth : HealthManager, HealthInterface
         }
         yield return new WaitForSeconds(1);
         StartCoroutine(CallItemUpdate());
+    }
+
+    public void CallItemOnPickup()
+    {
+        foreach (ItemStack i in itemList)
+        {
+            i.Item.OnPickup(i.Stacks);
+        }
+    }
+
+    public void CallItemOnHit(EnemyHealth enemyHealth)
+    {
+        foreach (ItemStack i in itemList)
+        {
+            i.Item.OnHit(enemyHealth, i.Stacks);
+        }
     }
 }

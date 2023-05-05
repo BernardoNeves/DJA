@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class EnemyHealth : HealthManager, HealthInterface
 {
-    public GameObject chestPrefab;
+    public EnemySpawner enemySpawner;
+
+    void Start() {
+
+        enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
+    
+    }
 
     public EnemyHealth(float health, float maxHealth) : base(health, maxHealth)
     {
@@ -16,21 +22,9 @@ public class EnemyHealth : HealthManager, HealthInterface
         }
     }
 
-    public override void Heal(float healAmount)
-    {
-        base.Heal(healAmount);
-        Debug.Log(Health);
-    }
-
-    public override void Damage(float damageAmount)
-    {
-        base.Damage(damageAmount);
-        Debug.Log(Health);
-    }
-
     public override void OnDeath()
     {
         base.OnDeath();
-        GameObject chest = Instantiate(chestPrefab, transform.position, Quaternion.identity);
+        enemySpawner.enemyCount--;
     }
 }

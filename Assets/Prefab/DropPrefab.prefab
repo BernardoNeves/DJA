@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5287897598163889074}
   - component: {fileID: 8700878596872747132}
   - component: {fileID: 8801867183226233357}
-  - component: {fileID: 4858420488930393160}
+  - component: {fileID: 507871227410779310}
   - component: {fileID: 5843447646486032822}
-  - component: {fileID: 6163337276054656514}
-  m_Layer: 0
+  - component: {fileID: -3933677925144627017}
+  m_Layer: 7
   m_Name: DropPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3896947069321208781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.065756, y: -64.63257, z: -13.393269}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,18 +86,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4858420488930393160
-BoxCollider:
+--- !u!135 &507871227410779310
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3896947069321208781}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5843447646486032822
 Rigidbody:
@@ -110,12 +110,12 @@ Rigidbody:
   m_Mass: 50
   m_Drag: 3
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &6163337276054656514
+  m_Constraints: 32
+  m_CollisionDetection: 1
+--- !u!114 &-3933677925144627017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour {
 
     public NavMeshAgent navMeshAgent;
-    public float timeBetweenHit = 60;
+    public float timeBetweenHit = 0.5f;
     public float startWaitTime = 4;
     public float timeToRotate = 2;
     public float speedWalk = 4;
@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour {
     public LayerMask obstacleMask;
     public float meshResolution = 1.0f;
     public int edgeInteractions = 4;
+
+    public int enemyDamage;
 
     float timeSinceLastHit;
 
@@ -244,15 +246,17 @@ public class EnemyController : MonoBehaviour {
     
     private void OnCollisionStay(Collision collision) {
 
-        if (collision.gameObject.name == "Player") {
+
+        if (collision.gameObject.tag == "Player") {
 
             if (CanHit()) {
 
-                HealthInterface healthInterface = collision.transform.GetComponent<HealthInterface>();
-                healthInterface?.Damage(5);
+                //HealthInterface healthInterface = collision.transform.GetComponent<HealthInterface>();
+                //healthInterface?.Damage(5);
 
-                timeSinceLastHit = 0;            
-            
+                GameManager.instance.PlayerHealth.Damage(enemyDamage);
+
+                timeSinceLastHit = 0;
             }
 
         }

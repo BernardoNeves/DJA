@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: HealingItem
   itemIcon: {fileID: 21300000, guid: 450238c5cd879aa4ea9d2f299e9fe80b, type: 3}
-  itemDropChance: 100
+  itemDropChance: 70
   itemStacks: 1

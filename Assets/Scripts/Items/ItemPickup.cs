@@ -24,26 +24,37 @@ public class ItemPickup : MonoBehaviour
                 return;
             }
         }
-        GameManager.instance._player.GetComponent<PlayerHealth>().itemList.Add(new ItemStack(Item, 1, itemData));
+        GameManager.instance.Player.GetComponent<PlayerHealth>().itemList.Add(new ItemStack(Item, 1, itemData));
         itemData.itemStacks = 1;
         InventoryManager.Instance.Add(itemData);
     }
 
-    private void OnCollisionEnter(Collision collision)
+   private void OnTriggerEnter(Collider collider)
     {
-        if(collision.gameObject.name == "Player")
+        if (collider.tag == "Player")
         {
             Pickup();
+            GameManager.instance.Player.GetComponent<PlayerHealth>().CallItemOnPickup();
             InventoryManager.Instance.ListItems();
         }
     }
 
     public Item AssignItem()
     {
-        switch (itemData.name)
+        switch (itemData.itemName)
         {
             case "HealingItem":
                 return new HealingItem();
+            case "MaxHealthItem":
+                return new MaxHealthItem();
+            case "SpeedItem":
+                return new SpeedItem();
+            case "JumpItem":
+                return new JumpItem();
+            case "GravityItem":
+                return new GravityItem();
+            case "DamageItem":
+                return new DamageItem();
             default:
                 return null;
         }

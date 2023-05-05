@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: 
   name: Assault Rifle
-  damage: 25
+  damage: 8
   maxDistance: 100
   currentAmmo: 50
   magSize: 50

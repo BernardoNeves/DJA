@@ -10,7 +10,12 @@ public abstract class Item
 
     }
 
-    public virtual void Onhit(EnemyHealth enemyHealth, int stacks)
+    public virtual void OnPickup(int stacks)
+    {
+
+    }
+
+    public virtual void OnHit(EnemyHealth enemyHealth, int stacks)
     {
 
     }
@@ -20,15 +25,47 @@ public class HealingItem : Item
 {
     public override void Update(PlayerHealth playerHealth, int stacks)
     {
-        playerHealth.Heal(3 + 2 * stacks);
-        //GameManager.instance.player.GetComponent<PlayerHealth>().Heal(3 + 2 * stacks
+        playerHealth.Heal(2.5f * stacks);
     }
 }
 
-public class FireDamageItem : Item
+public class MaxHealthItem : Item
 {
-    public override void Onhit(EnemyHealth enemyHealth, int stacks)
+    public override void OnPickup(int stacks)
     {
-        enemyHealth.Damage(3 + 2 * stacks);
+        GameManager.instance.Player.GetComponent<PlayerHealth>().MaxHealth = 100 + 10 * stacks;
+    }
+}
+
+public class SpeedItem : Item
+{
+    public override void OnPickup(int stacks)
+    {
+        GameManager.instance.Player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed = 4 + 0.25f * stacks;
+        GameManager.instance.Player.GetComponent<StarterAssets.FirstPersonController>().SprintSpeed = 6 + 0.25f * stacks;
+    }
+}
+
+public class JumpItem : Item
+{
+    public override void OnPickup(int stacks)
+    {
+        GameManager.instance.Player.GetComponent<StarterAssets.FirstPersonController>().JumpHeight = 1.2f + 0.125f  * stacks;
+    }
+}
+
+public class GravityItem : Item
+{
+    public override void OnPickup(int stacks)
+    {
+        GameManager.instance.Player.GetComponent<StarterAssets.FirstPersonController>().Gravity = -15 + 0.5f * stacks;
+    }
+}
+
+public class DamageItem : Item
+{
+    public override void OnHit(EnemyHealth enemyHealth, int stacks)
+    {
+        enemyHealth.Damage( 1.6f * stacks);
     }
 }

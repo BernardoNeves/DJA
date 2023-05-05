@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class WeaponSwitching : MonoBehaviour {
 
+    public StarterAssetsInputs _input;
+
     [Header("References")]
     [SerializeField] private Transform[] weapons;
-
-    [Header("Keys")]
-    [SerializeField] private KeyCode[] keys; 
 
     [Header("Settings")]
     [SerializeField] private float switchTime;
@@ -35,15 +35,13 @@ public class WeaponSwitching : MonoBehaviour {
             weapons[i] = transform.GetChild(i);
 
         }
-
-        if (keys == null) keys = new KeyCode[weapons.Length];
-
     }
 
     private void Update() {
 
         int previousSelectedWeapon = selectedWeapon;
 
+        /*
         for (int i = 0; i < keys.Length; i++) {
 
             if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime) {
@@ -55,6 +53,20 @@ public class WeaponSwitching : MonoBehaviour {
         }
 
         if (previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
+        */
+        if (_input.weaponSwap >= 1 || _input.weaponSwap <= -1)
+        {
+            if (selectedWeapon == 0)
+            {
+                selectedWeapon = 1;
+            }
+            else
+            {
+                selectedWeapon = 0;
+            }
+            Select(selectedWeapon);
+        }
+
 
         timeSinceLastSwitch += Time.deltaTime;
 

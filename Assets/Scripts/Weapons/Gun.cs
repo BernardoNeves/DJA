@@ -6,20 +6,30 @@ using UnityEngine;
 public class Gun : MonoBehaviour {
 
     [Header("References")]
-    [SerializeField] private GunData gunData;
-    [SerializeField] private Transform PlayerCamera;
+    [SerializeField] public GunData gunData;
+    [SerializeField] public Transform PlayerCamera;
     [SerializeField] WeaponUI _weaponUI;
 
     float timeSinceLastShot;
-        
-    public void Start() {
 
-        PlayerShoot.shootInput += Shoot;
-        PlayerShoot.reloadInput += StartReload;
+    private void Awake()
+    {
+        gunData.currentAmmo = gunData.magSize;
+    }
+
+    public void OnEnable() {
+
+        PlayerBehaviour.shootInput += Shoot;
+        PlayerBehaviour.reloadInput += StartReload;
 
     }
 
-    private void OnDisable() => gunData.reloading = false;
+    private void OnDisable()
+    {
+        PlayerBehaviour.shootInput -= Shoot;
+        PlayerBehaviour.reloadInput -= StartReload;
+        gunData.reloading = false;
+    }
 
     public void StartReload()
     {
@@ -79,6 +89,11 @@ public class Gun : MonoBehaviour {
 
                     HealthInterface healthInterface = hitInfo.transform.GetComponent<HealthInterface>();
                     healthInterface?.Damage(gunData.damage);
+                    EnemyHealth enemyHealth = hitInfo.transform.GetComponent<EnemyHealth>();
+                    if(enemyHealth != null && enemyHealth.Health > 0)
+                    {
+                        GameManager.instance.Player.GetComponent<PlayerHealth>().CallItemOnHit(enemyHealth);
+                    }
 
                 } 
 

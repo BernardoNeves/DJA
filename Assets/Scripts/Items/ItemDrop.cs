@@ -24,6 +24,7 @@ public class ItemDrop : MonoBehaviour
             ItemData droppedItem = possibleItems[Random.Range(0, possibleItems.Count)];
             return droppedItem;
         }
+        GameManager.instance.PlayerHealth.Damage(25);
         return null;
     }
 

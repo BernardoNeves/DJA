@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyHealth : HealthManager, HealthInterface
 {
     [SerializeField] Healthbar _healthbar;
     public EnemySpawner enemySpawner;
+    public GameObject damageText;
 
     void Start() {
 
         enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
     
+    }
+
+    public override void Damage(float damageAmount)
+    {
+        base.Damage(damageAmount);
+        if(damageText)
+            ShowDamageText(damageAmount);
     }
 
     public override void Update()
@@ -33,5 +43,12 @@ public class EnemyHealth : HealthManager, HealthInterface
     {
         base.OnDeath();
         enemySpawner.enemyCount--;
+    }
+
+    public void ShowDamageText(float damageAmount)
+    {
+        GameObject text = Instantiate(damageText, transform.position, Quaternion.identity, transform);
+        text.GetComponent<TMP_Text>().text = damageAmount.ToString();
+     
     }
 }

@@ -6,8 +6,10 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
 
-    public GameObject enemyPrefab;
+    public GameObject enemyMeleePrefab;
     public GameObject enemyRangedPrefab;
+    public GameObject enemyGrenadePrefab;
+
     public int enemiesPerWave = 3;
     public float spawnInterval = 1f;
     public float spawnDelay = 2f;
@@ -72,15 +74,19 @@ public class EnemySpawner : MonoBehaviour
 
         xPos = Random.Range(-20, 21);
         yPos = Random.Range(-20, 21);
-        enemyType = Random.Range(1, 3);
+        enemyType = Random.Range(1, 4);
 
         if (enemyType == 1) {
 
-            Instantiate(enemyPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+            Instantiate(enemyMeleePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
         } else if (enemyType == 2) {
 
             Instantiate(enemyRangedPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        } else if (enemyType == 3) {
+
+            Instantiate(enemyGrenadePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
         }
 

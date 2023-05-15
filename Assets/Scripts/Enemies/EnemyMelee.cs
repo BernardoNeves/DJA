@@ -118,7 +118,7 @@ public class EnemyMelee : MonoBehaviour {
 
     private void Chasing() {
 
-        _playerNear = false;
+        _playerNear = true;
         playerLastPos = Vector3.zero;
 
         if (!_caughtPlayer)

@@ -7,7 +7,12 @@ using UnityEngine.AI;
 public class EnemyRange : MonoBehaviour {
 
     public GameObject projectilePrefab;
+    public GameObject grenadePrefab;
+
     public float shootDistance;
+    public float throwDistance;
+
+    public int enemyType = 1;
 
     private Transform playerTransform;
     private float timeBetweenShot = 1f;
@@ -16,7 +21,8 @@ public class EnemyRange : MonoBehaviour {
     public NavMeshAgent navMeshAgent;
     public float startWaitTime = 4;
     public float timeToRotate = 2;
-    public float speed = 6;
+    public float speedWalk = 4;
+    public float speedRun = 6;
 
     public float viewRadius = 15;
     public float viewAngle = 90;
@@ -25,7 +31,15 @@ public class EnemyRange : MonoBehaviour {
     public float meshResolution = 1.0f;
     public int edgeInteractions = 4;
 
+    public Transform[] waypoints;
+    private int _currentWaypointIndex;
+
+    private float _waitTime;
+    private float _timeToRotate;
     private bool _playerInRange;
+    private bool _playerNear;
+    private bool _isPatrol;
+    private bool _caughtPlayer;
 
     Vector3 _playerPos;
 
@@ -35,13 +49,18 @@ public class EnemyRange : MonoBehaviour {
         playerTransform = GameManager.instance.Player.transform;
 
         _playerPos = playerTransform.position;
-
+        _isPatrol = true;
+        _caughtPlayer = false;
         _playerInRange = false;
+        _playerNear = false;
+        _waitTime = startWaitTime;
+        _timeToRotate = timeToRotate;
 
+        _currentWaypointIndex = 0;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         navMeshAgent.isStopped = false;
-        navMeshAgent.speed = speed;
+        navMeshAgent.speed = speedWalk;
         navMeshAgent.SetDestination(_playerPos);
 
     }
@@ -57,9 +76,13 @@ public class EnemyRange : MonoBehaviour {
             Shoot();
             Stop();
 
-        } else {
+        } else if (!_isPatrol) {
 
             ChasePlayer();
+
+        } else  {
+
+            Patroling();
 
         }
 
@@ -87,6 +110,7 @@ public class EnemyRange : MonoBehaviour {
                 {
 
                     _playerInRange = true;
+                    _isPatrol = false;
 
                 }
                 else
@@ -116,14 +140,87 @@ public class EnemyRange : MonoBehaviour {
 
     }
 
-    void ChasePlayer() {
+    private void Patroling() {
 
-        Move();
-        navMeshAgent.SetDestination(_playerPos);
+        if (_playerNear) {
+
+            if (_timeToRotate <= 0) {
+
+                Move(speedWalk);
+
+            } else {
+
+                Stop();
+                _timeToRotate -= Time.deltaTime;
+
+            }
+
+        } else {
+
+            _playerNear = false;
+
+            navMeshAgent.SetDestination(waypoints[_currentWaypointIndex].position);
+
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance) {
+
+                if (_waitTime <= 0) {
+
+                    NextPoint();
+                    Move(speedWalk);
+                    _waitTime = startWaitTime;
+
+                } else {
+
+                    Stop();
+                    _waitTime -= Time.deltaTime;
+
+                }
+
+            }
+
+        }
 
     }
 
-    void Move() {
+    void ChasePlayer() {
+
+        _playerNear = true;
+        
+        if (!_caughtPlayer) {
+
+            Move(speedRun);
+            navMeshAgent.SetDestination(_playerPos);
+
+        }
+
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance) {
+
+            if (_waitTime <= 0 && !_caughtPlayer && Vector3.Distance(transform.position, playerTransform.position) >= 6f)
+            {
+
+                _isPatrol = true;
+                _playerNear = false;
+                Move(speedWalk);
+                _timeToRotate = timeToRotate;
+                _waitTime = startWaitTime;
+                navMeshAgent.SetDestination(waypoints[_currentWaypointIndex].position);
+
+            } else {
+
+                if (Vector3.Distance(transform.position, playerTransform.position) >= 2.5f) {
+
+                    Stop();
+                    _waitTime -= Time.deltaTime;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    void Move(float speed) {
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
@@ -137,20 +234,37 @@ public class EnemyRange : MonoBehaviour {
 
     }
 
+    public void NextPoint() {
+
+        _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
+        navMeshAgent.SetDestination(waypoints[_currentWaypointIndex].position);
+
+    }
+
     private void Shoot() {
 
         if (CanShot()) {
 
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            Vector3 direction = (playerTransform.position - transform.position).normalized;
+            if (enemyType == 1) {
 
-            direction.x *= 100f;
-            direction.y += 0.2f;
-            direction.z *= 100f;
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                Vector3 direction = (playerTransform.position - transform.position).normalized;
 
-            projectile.GetComponent<Rigidbody>().velocity = direction;
+                direction.x *= 100f;
+                direction.y += 0.2f;
+                direction.z *= 100f;
 
-            timeSinceLastShot = 0;
+                projectile.GetComponent<Rigidbody>().velocity = direction;
+
+                timeSinceLastShot = 0;
+
+            } else if (enemyType == 2) {
+
+                GameObject grenade = Instantiate(grenadePrefab, transform.position, Quaternion.identity);
+                Rigidbody rigidbody = grenade.GetComponent<Rigidbody>();
+                rigidbody.AddForce(transform.forward * throwDistance, ForceMode.VelocityChange);
+
+            }
 
         }
 

@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 5345563953228712454}
   - component: {fileID: 3286063478234322896}
   m_Layer: 0
-  m_Name: Enemy Ranged
+  m_Name: Enemy Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
   grenadePrefab: {fileID: 3896947069321208781, guid: 442c2804f21f1224f9b921dca4f660ac, type: 3}
   shootDistance: 15
   throwDistance: 0
-  enemyType: 1
+  enemyType: 2
   navMeshAgent: {fileID: 8598965432235675171}
   startWaitTime: 4
   timeToRotate: 2

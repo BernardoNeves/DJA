@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyMelee : MonoBehaviour {
 
     public NavMeshAgent navMeshAgent;
     public float timeBetweenHit = 0.5f;
@@ -21,7 +21,6 @@ public class EnemyController : MonoBehaviour {
     public int edgeInteractions = 4;
 
     public int enemyDamage;
-
     float timeSinceLastHit;
 
     public Transform[] waypoints;
@@ -122,16 +121,19 @@ public class EnemyController : MonoBehaviour {
         _playerNear = false;
         playerLastPos = Vector3.zero;
 
-        if (!_caughtPlayer) {
+        if (!_caughtPlayer)
+        {
 
             Move(speedRun);
             navMeshAgent.SetDestination(_playerPos);
 
         }
 
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance) {
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        {
 
-            if (_waitTime <= 0 && !_caughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f) {
+            if (_waitTime <= 0 && !_caughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
+            {
 
                 _isPatrol = true;
                 _playerNear = false;
@@ -140,9 +142,12 @@ public class EnemyController : MonoBehaviour {
                 _waitTime = startWaitTime;
                 navMeshAgent.SetDestination(waypoints[_currentWaypointIndex].position);
 
-            } else {
+            }
+            else
+            {
 
-                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f) {
+                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+                {
 
                     Stop();
                     _waitTime -= Time.deltaTime;
@@ -245,7 +250,6 @@ public class EnemyController : MonoBehaviour {
     }
     
     private void OnCollisionStay(Collision collision) {
-
 
         if (collision.gameObject.tag == "Player") {
 

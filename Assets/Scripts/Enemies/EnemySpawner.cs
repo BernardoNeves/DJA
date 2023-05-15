@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {
 
     public GameObject enemyPrefab;
+    public GameObject enemyRangedPrefab;
     public int enemiesPerWave = 3;
     public float spawnInterval = 1f;
     public float spawnDelay = 2f;
@@ -25,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int xPos;
     private int yPos;
+    private int enemyType;
 
     public IEnumerator SpawnWave()
     {
@@ -70,8 +72,17 @@ public class EnemySpawner : MonoBehaviour
 
         xPos = Random.Range(-20, 21);
         yPos = Random.Range(-20, 21);
+        enemyType = Random.Range(1, 2);
 
-        Instantiate(enemyPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+        if (enemyType == 1) {
+
+            Instantiate(enemyPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        } else if (enemyType == 2) {
+
+            Instantiate(enemyRangedPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        }
 
         enemyCount++;
         enemiesSpawnedForWave++;

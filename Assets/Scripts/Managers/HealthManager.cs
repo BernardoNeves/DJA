@@ -10,6 +10,9 @@ public abstract class HealthManager : MonoBehaviour
     public float _currentHealth;
     public float _currentMaxHealth;
 
+    [SerializeField]
+    //private ProgressBar HealthBar;
+
     public float Health
     {
         get
@@ -54,6 +57,8 @@ public abstract class HealthManager : MonoBehaviour
         {
             _currentHealth = _currentMaxHealth;
         }
+
+        //HealthBar.SetProgress(_currentHealth / _currentMaxHealth);
     }
 
     public virtual void Damage(float damageAmount)
@@ -86,4 +91,8 @@ public abstract class HealthManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /*public void SetuHealthBar(Canvas canvas, Camera camera)
+    {
+        HealthBar.tranform.SetPArent(Canvas.transform);
+    }*/
 }

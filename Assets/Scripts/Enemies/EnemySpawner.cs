@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
 
         xPos = Random.Range(-20, 21);
         yPos = Random.Range(-20, 21);
-        enemyType = Random.Range(1, 2);
+        enemyType = Random.Range(1, 3);
 
         if (enemyType == 1) {
 

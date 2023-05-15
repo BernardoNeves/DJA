@@ -6,18 +6,32 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
     public float damage;
+    public float timeLeftLife = 5f;
 
-    private void OnTriggerEnter(Collider collider)
-    {
+    private float timeDelta;
 
-        if (collider.tag == "Player")
-        {
+    void Update() {
 
-            GameManager.instance.PlayerHealth.Damage(damage);
-            Debug.Log("You Got Hit");
+        timeDelta += Time.deltaTime;
+
+        if (timeDelta > timeLeftLife) {
+
+            Destroy(this.gameObject);
 
         }
-            //Destroy(this.gameObject);
+
+    }
+
+    private void OnTriggerEnter(Collider collider) {
+
+        if (collider.tag == "Player") {
+
+            GameManager.instance.PlayerHealth.Damage(damage);
+
+            Destroy(this.gameObject);
+
+        }
+        
     }
 
 }

@@ -361,8 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4c2e049f37cfc4c99e12437ef09bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 100
-  _currentMaxHealth: 100
+  _currentHealth: 60
+  _currentMaxHealth: 60
   _healthbar: {fileID: 1645587011178185433}
   enemySpawner: {fileID: 0}
 --- !u!1 &4133949967233935875

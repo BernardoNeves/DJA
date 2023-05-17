@@ -397,8 +397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3896947069321208781, guid: e837d1126fd807849aba1c469b9190ba, type: 3}
   grenadePrefab: {fileID: 3896947069321208781, guid: 442c2804f21f1224f9b921dca4f660ac, type: 3}
-  shootDistance: 15
-  throwDistance: 0
+  shootDistance: 5
+  throwDistance: 7.5
   enemyType: 2
   navMeshAgent: {fileID: 8598965432235675171}
   startWaitTime: 4

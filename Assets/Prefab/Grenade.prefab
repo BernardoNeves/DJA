@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8801867183226233357}
   - component: {fileID: 507871227410779310}
   - component: {fileID: 5843447646486032822}
-  - component: {fileID: 564667567}
   - component: {fileID: 8436316237777889210}
   m_Layer: 7
   m_Name: Grenade
@@ -95,10 +94,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3896947069321208781}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5843447646486032822
 Rigidbody:
@@ -116,19 +115,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 1
---- !u!135 &564667567
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3896947069321208781}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8436316237777889210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,5 +129,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 3
   radius: 5
-  force: 10
+  force: 700
   damage: 10

@@ -260,9 +260,16 @@ public class EnemyRange : MonoBehaviour {
 
             } else if (enemyType == 2) {
 
-                GameObject grenade = Instantiate(grenadePrefab, transform.position, Quaternion.identity);
+                Vector3 throwOffset = new Vector3(0f, 1.2f, 0f);
+                Vector3 playerDirection = (playerTransform.position - transform.position).normalized;
+
+                playerDirection.y += 0.5f;
+                
+                GameObject grenade = Instantiate(grenadePrefab, transform.position + throwOffset, Quaternion.LookRotation(playerDirection));
                 Rigidbody rigidbody = grenade.GetComponent<Rigidbody>();
-                rigidbody.AddForce(transform.forward * throwDistance, ForceMode.VelocityChange);
+                rigidbody.AddForce(playerDirection * throwDistance, ForceMode.VelocityChange);
+
+                timeSinceLastShot = 0;
 
             }
 

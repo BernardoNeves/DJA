@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMeleePrefab: {fileID: 5755593629760698923, guid: da6aa0a528339944dba786970adf1963, type: 3}
   enemyRangedPrefab: {fileID: 4789042651418447263, guid: 62d464d1c8e623e47bbd121a866076fd, type: 3}
-  enemyGrenadePrefab: {fileID: 4789042651418447263, guid: 62d464d1c8e623e47bbd121a866076fd, type: 3}
+  enemyGrenadePrefab: {fileID: 4789042651418447263, guid: abf86932c64c3b6498d8096ac45bd969, type: 3}
   enemiesPerWave: 3
   spawnInterval: 1
   spawnDelay: 2

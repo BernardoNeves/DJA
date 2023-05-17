@@ -409,12 +409,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 5755593629760698913}
-  timeBetweenHit: 0.5
+  timeBetweenHit: 0.75
   startWaitTime: 4
   timeToRotate: 2
-  speedWalk: 4
-  speedRun: 6
-  viewRadius: 15
+  speedWalk: 6
+  speedRun: 8
+  viewRadius: 20
   viewAngle: 90
   playerMask:
     serializedVersion: 2
@@ -424,7 +424,7 @@ MonoBehaviour:
     m_Bits: 128
   meshResolution: 1
   edgeInteractions: 4
-  enemyDamage: 5
+  enemyDamage: 8
   waypoints:
   - {fileID: 5755593628372647461}
   - {fileID: 5755593629234257735}
@@ -444,7 +444,7 @@ MonoBehaviour:
   _currentMaxHealth: 100
   _healthbar: {fileID: 6942027065737672606}
   enemySpawner: {fileID: 0}
-  damageText: {fileID: 5207108927761153795, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
+  damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6949761040387056560
 GameObject:
   m_ObjectHideFlags: 0

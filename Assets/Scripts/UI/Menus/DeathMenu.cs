@@ -26,7 +26,7 @@ public class DeathMenu : MonoBehaviour {
     void Death () {
 
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         GameManager.instance.Player.GetComponent<StarterAssets.StarterAssetsInputs>().cursorInputForLook = false;
 
         Time.timeScale = 0f;

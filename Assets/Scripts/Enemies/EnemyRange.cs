@@ -15,7 +15,7 @@ public class EnemyRange : MonoBehaviour {
     public int enemyType = 1;
 
     private Transform playerTransform;
-    private float timeBetweenShot = 1f;
+    public float timeBetweenShot = 1f;
     private float timeSinceLastShot = 0f;
 
     public NavMeshAgent navMeshAgent;

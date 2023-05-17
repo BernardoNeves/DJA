@@ -400,12 +400,13 @@ MonoBehaviour:
   shootDistance: 15
   throwDistance: 0
   enemyType: 1
+  timeBetweenShot: 0.25
   navMeshAgent: {fileID: 8598965432235675171}
   startWaitTime: 4
   timeToRotate: 2
   speedWalk: 4
   speedRun: 6
-  viewRadius: 15
+  viewRadius: 50
   viewAngle: 90
   playerMask:
     serializedVersion: 2
@@ -434,7 +435,7 @@ MonoBehaviour:
   _currentMaxHealth: 60
   _healthbar: {fileID: 4602120084149413327}
   enemySpawner: {fileID: 0}
-  damageText: {fileID: 5207108927761153795, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
+  damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6422760165929307105
 GameObject:
   m_ObjectHideFlags: 0

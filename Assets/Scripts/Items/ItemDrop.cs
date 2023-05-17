@@ -34,8 +34,8 @@ public class ItemDrop : MonoBehaviour
         if(droppedItem != null)
         {
             GameObject dropGameObject = Instantiate(dropPrefab, spawnPosition, Quaternion.identity);
-            float dropForce = 600f;
-            Vector3 dropDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            float dropForce = 500f;
+            Vector3 dropDirection = new Vector3(Random.Range(-1f, 1f), 1f, Random.Range(-1f, 1f));
             dropGameObject.GetComponent<Rigidbody>().AddForce(dropDirection * dropForce, ForceMode.Impulse);
             dropGameObject.GetComponent<ItemPickup>().itemData = droppedItem;
         }

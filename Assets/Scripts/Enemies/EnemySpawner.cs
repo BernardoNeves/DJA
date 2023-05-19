@@ -9,12 +9,18 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyMeleePrefab;
     public GameObject enemyRangedPrefab;
     public GameObject enemyGrenadePrefab;
+    public GameObject enemyMinionPrefab;
+    public GameObject enemyLifeStealPrefab;
+    public GameObject enemyShieldPrefab;
+    public GameObject enemyExplosionPrefab;
 
     public int enemiesPerWave = 3;
     public float spawnInterval = 1f;
     public float spawnDelay = 2f;
 
-    public GameObject bossPrefab;
+    public GameObject bossMeleePrefab;
+    public GameObject bossSummonPrefab;
+
     public int bossPerWave = 0;
     public float spawnBossInterval = 3f;
     public float spawnBossDelay = 6f;
@@ -74,9 +80,10 @@ public class EnemySpawner : MonoBehaviour
 
         xPos = Random.Range(-20, 21);
         yPos = Random.Range(-20, 21);
-        enemyType = Random.Range(1, 4);
+        enemyType = Random.Range(1, 8);
 
-        if (enemyType == 1) {
+        if (enemyType == 1)
+        {
 
             Instantiate(enemyMeleePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
@@ -88,9 +95,25 @@ public class EnemySpawner : MonoBehaviour
 
             Instantiate(enemyGrenadePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
+        } else if (enemyType == 4) {
+
+            Instantiate(enemyMinionPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        } else if (enemyType == 5) {
+
+            Instantiate(enemyLifeStealPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        } else if (enemyType == 6) {
+
+            Instantiate(enemyShieldPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        } else if (enemyType == 7) {
+
+            Instantiate(enemyExplosionPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
         }
 
-        enemyCount++;
+            enemyCount++;
         enemiesSpawnedForWave++;
 
     }
@@ -100,8 +123,17 @@ public class EnemySpawner : MonoBehaviour
 
         yPos = Random.Range(-20, 21);
         xPos = Random.Range(-20, 21);
+        enemyType = Random.Range(1, 3);
 
-        Instantiate(bossPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+        if (enemyType == 1) {
+
+            Instantiate(bossMeleePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        } else if (enemyType == 2) {
+
+            Instantiate(bossSummonPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+
+        }
 
         enemyCount++;
         bossesSpawnedForWave++;

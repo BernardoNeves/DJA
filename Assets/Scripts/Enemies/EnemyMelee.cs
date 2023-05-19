@@ -13,6 +13,12 @@ public class EnemyMelee : MonoBehaviour {
     public float speedWalk = 4;
     public float speedRun = 6;
 
+    public EnemyHealth enemyHealth;
+
+    public int enemyType = 1;
+
+    public GameObject explosionPrefab;
+
     public float viewRadius = 15;
     public float viewAngle = 90;
     public LayerMask playerMask;
@@ -38,7 +44,6 @@ public class EnemyMelee : MonoBehaviour {
 
 
     void Start() {
-
         _playerPos = Vector3.zero;
         _isPatrol = true;
         _caughtPlayer = false;
@@ -253,14 +258,31 @@ public class EnemyMelee : MonoBehaviour {
 
         if (collision.gameObject.tag == "Player") {
 
-            if (CanHit()) {
+            if (enemyType == 1) {
 
-                //HealthInterface healthInterface = collision.transform.GetComponent<HealthInterface>();
-                //healthInterface?.Damage(5);
+                if (CanHit()) {
 
-                GameManager.instance.PlayerHealth.Damage(enemyDamage);
+                    GameManager.instance.PlayerHealth.Damage(enemyDamage);
 
-                timeSinceLastHit = 0;
+                    timeSinceLastHit = 0;
+                }
+
+            } else if (enemyType == 2) {
+
+                if (CanHit()) {
+
+                    GameManager.instance.PlayerHealth.Damage(enemyDamage);
+                    
+                    enemyHealth.Heal(enemyDamage);
+
+                    timeSinceLastHit = 0;
+
+                }
+
+            } else if (enemyType == 3) {
+
+                Explode();
+
             }
 
         }
@@ -278,6 +300,14 @@ public class EnemyMelee : MonoBehaviour {
             return true;
 
         }
+
+    }
+
+    private void Explode() {
+
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
 
     }
 

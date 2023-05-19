@@ -92,7 +92,7 @@ public class Gun : MonoBehaviour {
                     EnemyHealth enemyHealth = hitInfo.transform.GetComponent<EnemyHealth>();
                     if(enemyHealth != null && enemyHealth.Health > 0)
                     {
-                        GameManager.instance.Player.GetComponent<PlayerHealth>().CallItemOnHit(enemyHealth);
+                        GameManager.instance.Player.GetComponent<PlayerHealth>().CallItemOnHit(enemyHealth, gunData.damage);
                     }
 
                 } 

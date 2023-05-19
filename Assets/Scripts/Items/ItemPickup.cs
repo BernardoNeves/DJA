@@ -47,6 +47,10 @@ public class ItemPickup : MonoBehaviour
                 return new HealingItem();
             case "MaxHealthItem":
                 return new MaxHealthItem();
+            case "ShieldRate":
+                return new ShieldRate();
+            case "MaxShieldItem":
+                return new MaxShieldItem();
             case "SpeedItem":
                 return new SpeedItem();
             case "JumpItem":
@@ -55,6 +59,8 @@ public class ItemPickup : MonoBehaviour
                 return new GravityItem();
             case "DamageItem":
                 return new DamageItem();
+            case "LifeStealItem":
+                return new LifeStealItem();
             default:
                 return null;
         }

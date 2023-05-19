@@ -5,20 +5,25 @@ using UnityEngine;
 public class PlayerHealth : HealthManager, HealthInterface
 {
     [SerializeField] Healthbar _healthbar;
+    [SerializeField] Shieldbar _shieldbar;
 
     public List<ItemStack> itemList = new List<ItemStack>();
 
-    public PlayerHealth(float health, float maxHealth) : base(health, maxHealth)
+    public PlayerHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;
+        _currentShield = shield;
+        _currentMaxShield = maxShield;
+
         if (_currentHealth > _currentMaxHealth)
         {
             _currentHealth = _currentMaxHealth;
         }
     }
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         StartCoroutine(CallItemUpdate());
     }
 
@@ -27,6 +32,9 @@ public class PlayerHealth : HealthManager, HealthInterface
         base.Update();
         _healthbar.SetHealth(Health);
         _healthbar.SetMaxHealth(MaxHealth);
+
+        _shieldbar.SetShield(Shield);
+        _shieldbar.SetMaxShield(MaxShield);
 
     }
 
@@ -53,11 +61,12 @@ public class PlayerHealth : HealthManager, HealthInterface
         }
     }
 
-    public void CallItemOnHit(EnemyHealth enemyHealth)
+    public void CallItemOnHit(EnemyHealth enemyHealth, float damageamount)
     {
         foreach (ItemStack i in itemList)
         {
-            i.Item.OnHit(enemyHealth, i.Stacks);
+            i.Item.OnHit(enemyHealth, damageamount, i.Stacks);
         }
     }
+
 }

@@ -11,4 +11,5 @@ public class ItemData : ScriptableObject
     public Sprite itemIcon;
     public int itemDropChance;
     public int itemStacks;
+    public string itemDescription;
 }

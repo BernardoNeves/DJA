@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     public List<ItemData> Items = new List<ItemData>();
 
     public Transform ItemContent;
-    public GameObject ItemPrefab;
+    public GameObject InventoryItemPrefab;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class InventoryManager : MonoBehaviour
 
     public void Add(ItemData item)
     {
-        Items.Add(item); 
+        Items.Add(item);
     }
 
     public void Remove(ItemData item)
@@ -28,22 +28,24 @@ public class InventoryManager : MonoBehaviour
 
     public void ListItems()
     {
-        foreach(Transform item in ItemContent)
+        foreach (Transform item in ItemContent)
         {
             Destroy(item.gameObject);
         }
 
-        foreach(var item in Items)
+        foreach (ItemData item in Items)
         {
-            GameObject obj = Instantiate(ItemPrefab, ItemContent);
+            GameObject obj = Instantiate(InventoryItemPrefab, ItemContent);
             var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
             var itemStacks = obj.transform.Find("ItemStacks").GetComponent<Text>();
+            var itemDescription = obj.transform.Find("ItemDescription").GetComponent<Text>();
+
 
             itemName.text = item.itemName;
             itemIcon.sprite = item.itemIcon;
             itemStacks.text = item.itemStacks.ToString();
+            itemDescription.text = item.itemDescription;
         }
     }
-
 }

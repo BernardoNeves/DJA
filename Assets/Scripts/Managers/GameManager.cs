@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     public GameObject _player;
+    public Canvas _canvas;
+    public GameObject _panel;
 
     public GameObject chestPrefab;
     public GameObject chestBossPrefab;
@@ -46,6 +48,30 @@ public class GameManager : MonoBehaviour
         set
         {
             _player = value;
+        }
+    }
+
+    public Canvas Canvas
+    {
+        get
+        {
+            return _canvas;
+        }
+        set
+        {
+            _canvas = value;
+        }
+    }
+
+    public GameObject Panel
+    {
+        get
+        {
+            return _panel;
+        }
+        set
+        {
+            _panel = value;
         }
     }
 

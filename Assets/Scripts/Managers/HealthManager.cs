@@ -9,9 +9,17 @@ public abstract class HealthManager : MonoBehaviour
     [Header("Health")]
     public float _currentHealth;
     public float _currentMaxHealth;
+    [Header("Shield")]
+    public float _currentShield;
+    public float _currentMaxShield;
+    public float _shieldRechargeAmount;
+    public float _shieldRechargeRate;
+    public float _shieldRechargeCooldown;
+
+    private float _timeSinceLastDamage = 0f;
+
 
     [SerializeField]
-    //private ProgressBar HealthBar;
 
     public float Health
     {
@@ -24,7 +32,7 @@ public abstract class HealthManager : MonoBehaviour
             _currentHealth = value;
         }
     }
-    
+
     public float MaxHealth
     {
         get
@@ -37,14 +45,43 @@ public abstract class HealthManager : MonoBehaviour
         }
     }
 
+    public float Shield
+    {
+        get
+        {
+            return _currentShield;
+        }
+        set
+        {
+            _currentShield = value;
+        }
+    }
+
+    public float MaxShield
+    {
+        get
+        {
+            return _currentMaxShield;
+        }
+        set
+        {
+            _currentMaxShield = value;
+        }
+    }
+
     public HealthManager(float health, float maxHealth)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;
         if (_currentHealth > _currentMaxHealth)
-            {
-                _currentHealth = _currentMaxHealth;
-            }
+        {
+            _currentHealth = _currentMaxHealth;
+        }
+    }
+
+    public virtual void Start()
+    {
+        StartCoroutine(ShieldRegen());
     }
 
     public virtual void Update()
@@ -58,19 +95,38 @@ public abstract class HealthManager : MonoBehaviour
             _currentHealth = _currentMaxHealth;
         }
 
-        //HealthBar.SetProgress(_currentHealth / _currentMaxHealth);
+        if (_currentShield < 0)
+        {
+            _currentShield = 0;
+        }
+        if (_currentShield > _currentMaxShield)
+        {
+            _currentShield = _currentMaxShield;
+        }
+        _timeSinceLastDamage += Time.deltaTime;
     }
 
     public virtual void Damage(float damageAmount)
     {
-        if (_currentHealth > 0)
+        _timeSinceLastDamage = 0f;
+
+        if (_currentShield > 0)
         {
-            _currentHealth -= damageAmount;
+            _currentShield -= damageAmount;
         }
-        if (_currentHealth <= 0)
+        if (_currentShield <= 0)
         {
-            _currentHealth = 0;
-            OnDeath();
+            _currentShield = 0;
+
+            if (_currentHealth > 0)
+            {
+                _currentHealth -= damageAmount;
+            }
+            if (_currentHealth <= 0)
+            {
+                _currentHealth = 0;
+                OnDeath();
+            }
         }
     }
 
@@ -80,10 +136,27 @@ public abstract class HealthManager : MonoBehaviour
         {
             _currentHealth += healAmount;
         }
-        if (_currentHealth > _currentMaxHealth)
+        else if (_currentHealth > _currentMaxHealth)
         {
             _currentHealth = _currentMaxHealth;
         }
+    }
+
+    IEnumerator ShieldRegen()
+    {
+        if (_timeSinceLastDamage >= _shieldRechargeCooldown)
+        {
+            if (_currentShield < _currentMaxShield)
+            {
+                _currentShield += _shieldRechargeAmount;
+            }
+            else if (_currentShield > _currentMaxShield)
+            {
+                _currentShield = _currentMaxShield;
+            }
+        }
+        yield return new WaitForSeconds(1/_shieldRechargeRate);
+        StartCoroutine(ShieldRegen());
     }
 
     public virtual void OnDeath()
@@ -91,8 +164,4 @@ public abstract class HealthManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /*public void SetuHealthBar(Canvas canvas, Camera camera)
-    {
-        HealthBar.tranform.SetPArent(Canvas.transform);
-    }*/
 }

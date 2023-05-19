@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: DamageItem
   itemIcon: {fileID: 21300000, guid: d87b3c9c3038af845b1f4bd4e2fcd495, type: 3}
   itemDropChance: 25
-  itemStacks: 1
+  itemStacks: 0
+  itemDescription: 

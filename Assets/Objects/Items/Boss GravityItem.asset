@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: GravityItem
   itemIcon: {fileID: 21300000, guid: 0b01d8513e446554bb691d0ca16b0830, type: 3}
   itemDropChance: 30
-  itemStacks: 1
+  itemStacks: 0
+  itemDescription: 

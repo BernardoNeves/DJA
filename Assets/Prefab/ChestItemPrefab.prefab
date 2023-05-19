@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6506307419394858562}
   - component: {fileID: 7092306459534234212}
   - component: {fileID: 8401230494796319873}
+  - component: {fileID: 7741565160673868468}
   m_Layer: 5
   m_Name: ChestItemPrefab
   m_TagString: Untagged
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -124,7 +125,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7092306459534234212}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7741565160673868468}
+        m_TargetAssemblyTypeName: ItemPick, Assembly-CSharp
+        m_MethodName: Pick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7741565160673868468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258464725393630906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81db1d1a44449414496f1300b20d21c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 0}
 --- !u!1 &1410555442625593495
 GameObject:
   m_ObjectHideFlags: 0

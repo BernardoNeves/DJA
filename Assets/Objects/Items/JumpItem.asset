@@ -16,3 +16,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 961b9b10e3d57cb4ea08d48054995dd6, type: 3}
   itemDropChance: 80
   itemStacks: 3
+  itemDescription: 

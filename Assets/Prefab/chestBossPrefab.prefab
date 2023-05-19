@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4457596111675981269}
   - component: {fileID: 4457596111675981274}
   - component: {fileID: 4457596111675981265}
-  - component: {fileID: 4457596111675981270}
   m_Layer: 10
   m_Name: chestBossPrefab
   m_TagString: Untagged
@@ -111,22 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ac55dad148a9e44abf8d9f4af81545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4457596111675981270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4457596111675981273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b481b84eb946bfc478870e6bba612d16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropPrefab: {fileID: 3896947069321208781, guid: 832d44f1bfe3c2b40960743650021bc5, type: 3}
   Drops:
   - {fileID: 11400000, guid: ea986a99cf4d03349b56ef431c1f93cc, type: 2}
   - {fileID: 11400000, guid: e33a15bdb87a2b34981a41cb4293ec27, type: 2}
   - {fileID: 11400000, guid: ba4a8c27228f607478c31ef3ccf9f75d, type: 2}
   - {fileID: 11400000, guid: 9c82d5f127dc1b94c95205742e7423d4, type: 2}
   - {fileID: 11400000, guid: 6e3e90802f1468c48a973f464777f1eb, type: 2}
+  ChestItemPrefab: {fileID: 1258464725393630906, guid: b81d3a1ca336e9b42b4762ea2d90e209, type: 3}

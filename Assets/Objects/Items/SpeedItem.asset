@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: SpeedItem
   itemIcon: {fileID: 21300000, guid: 1b72634ede88edc4c9a41471f5088168, type: 3}
   itemDropChance: 100
-  itemStacks: 1
+  itemStacks: 6
   itemDescription: Raises the player speed by 1 per Stack

@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: MaxHealthItem
   itemIcon: {fileID: 21300000, guid: 6cf8e2ae6d529414985123e2aee65767, type: 3}
   itemDropChance: 90
-  itemStacks: 1
+  itemStacks: 0
   itemDescription: Constantly heals the player 1 HP per stack per second

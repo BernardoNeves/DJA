@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemInfo : MonoBehaviour
+public class ItemInformation : MonoBehaviour
 {
     public GameObject ChestItemPrefab;
     private Transform ItemContent;

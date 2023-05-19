@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public GameObject _player;
     public Canvas _canvas;
     public GameObject _panel;
+    public GameObject _chestUI;
+    public Transform _chestContent;
+
 
     public GameObject chestPrefab;
     public GameObject chestBossPrefab;
@@ -72,6 +75,29 @@ public class GameManager : MonoBehaviour
         set
         {
             _panel = value;
+        }
+    }
+    public GameObject ChestUI
+    {
+        get
+        {
+            return _chestUI;
+        }
+        set
+        {
+            _chestUI = value;
+        }
+    }
+
+    public Transform ChestContent
+    {
+        get
+        {
+            return _chestContent;
+        }
+        set
+        {
+            _chestContent = value;
         }
     }
 

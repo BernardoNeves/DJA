@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: MaxShieldItem
   itemIcon: {fileID: 21300000, guid: ac3e4e23e673c6442bb24c09f1eb95c2, type: 3}
   itemDropChance: 70
-  itemStacks: 1
+  itemStacks: 0
+  itemDescription: 

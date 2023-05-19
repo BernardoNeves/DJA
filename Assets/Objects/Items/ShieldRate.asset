@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: ShieldRate
   itemIcon: {fileID: 21300000, guid: c6b512a1aaefb14458c8a9df8205789b, type: 3}
   itemDropChance: 25
-  itemStacks: 1
+  itemStacks: 0
+  itemDescription: 

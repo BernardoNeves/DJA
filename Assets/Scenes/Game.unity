@@ -2081,7 +2081,7 @@ MonoBehaviour:
   chestBossPrefab: {fileID: 4457596111675981273, guid: 8cf03c8852d98cf42a2fc87efe540065, type: 3}
   enemySpawner: {fileID: 0}
   victoryStart: {fileID: 0}
-  waveNumber: -9
+  waveNumber: 0
   gameWon: 0
 --- !u!4 &803633328
 Transform:

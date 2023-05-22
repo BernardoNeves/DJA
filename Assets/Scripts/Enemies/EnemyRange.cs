@@ -11,6 +11,8 @@ public class EnemyRange : MonoBehaviour {
     public GameObject grenadePrefab;
     public GameObject bigProjectilePrefab;
 
+    public int enemyChanceSpawn;
+
     public GameObject minionPrefab;
     public float timeBetweenSummon = 10f;
     private float timeSinceLastSummon = 0f;
@@ -94,9 +96,13 @@ public class EnemyRange : MonoBehaviour {
 
             Stop();
 
+            transform.LookAt(playerTransform);
+
         } else if (!_isPatrol) {
 
             ChasePlayer();
+
+            transform.LookAt(playerTransform);
 
         } else  {
 

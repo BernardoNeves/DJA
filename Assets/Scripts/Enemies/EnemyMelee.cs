@@ -6,6 +6,10 @@ using UnityEngine.AI;
 
 public class EnemyMelee : MonoBehaviour {
 
+    public Transform playerTransform;
+
+    public int enemyChanceSpawn;
+
     public NavMeshAgent navMeshAgent;
     public float timeBetweenHit = 0.5f;
     public float startWaitTime = 4;
@@ -44,6 +48,9 @@ public class EnemyMelee : MonoBehaviour {
 
 
     void Start() {
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
         _playerPos = Vector3.zero;
         _isPatrol = true;
         _caughtPlayer = false;
@@ -70,6 +77,8 @@ public class EnemyMelee : MonoBehaviour {
         if (!_isPatrol) {
 
             Chasing();
+
+            transform.LookAt(playerTransform);
 
         } else {
 

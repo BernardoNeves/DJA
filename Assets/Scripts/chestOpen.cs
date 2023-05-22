@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class chestOpen : MonoBehaviour, InteractableInterface
 {
@@ -40,6 +41,13 @@ public class chestOpen : MonoBehaviour, InteractableInterface
     public void Interact()
     {
         List<ItemData> CurrentChestItems = GetDroppedItem();
+        if(CurrentChestItems.Count == 0)
+        {
+            GameManager.instance.PlayerHealth.Damage(25 * Random.Range(1, 5));
+            Destroy(gameObject);
+
+            return;
+        }
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         GameManager.instance.Player.GetComponent<StarterAssets.StarterAssetsInputs>().cursorInputForLook = false;
@@ -62,10 +70,10 @@ public class chestOpen : MonoBehaviour, InteractableInterface
             GameObject obj = Instantiate(ChestItemPrefab, GameManager.instance.ChestContent);
             obj.GetComponent<ItemPick>().itemData = item;
 
-            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+            var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            var itemStacks = obj.transform.Find("ItemStacks").GetComponent<Text>();
-            var itemDescription = obj.transform.Find("ItemDescription").GetComponent<Text>();
+            var itemStacks = obj.transform.Find("ItemStacks").GetComponent<TMP_Text>();
+            var itemDescription = obj.transform.Find("ItemDescription").GetComponent<TMP_Text>();
 
 
             itemName.text = item.itemName;

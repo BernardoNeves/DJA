@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         InventoryManager.Instance.ListItems();
+        Application.runInBackground = true;
 
     }
 
@@ -145,11 +146,11 @@ public class GameManager : MonoBehaviour
 
                 if (waveNumber % 10 == 0 && waveNumber != 0) {
                 
-                    GameObject chest = Instantiate(chestBossPrefab, new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f)), Quaternion.identity);
+                    GameObject chest = Instantiate(chestBossPrefab, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f)), Quaternion.identity);
                 
                 } else {
 
-                    GameObject chest = Instantiate(chestPrefab, new Vector3(Random.Range(-10f, 10f), 0.5f, Random.Range(-10f, 10f)), Quaternion.identity);
+                    GameObject chest = Instantiate(chestPrefab, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f)), Quaternion.identity);
 
                 }
 

@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Healthbar : MonoBehaviour {
 
     Slider _healthSlider;
+    TMP_Text _healthText;
     private float _slideSpeed = 500;
     private float _target = 100;
 
     private void Start() {
-
+        _healthText = GetComponentInChildren<TMP_Text>();
         _healthSlider = GetComponent<Slider>();
     }
 
@@ -26,5 +25,7 @@ public class Healthbar : MonoBehaviour {
     private void FixedUpdate()
     {
         _healthSlider.value = Mathf.MoveTowards(_healthSlider.value, _target, _slideSpeed * Time.deltaTime);
+        _healthText.text = Mathf.RoundToInt(_healthSlider.value).ToString() + "/" + _healthSlider.maxValue.ToString();
+
     }
 }   

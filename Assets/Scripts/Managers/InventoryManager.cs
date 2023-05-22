@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class InventoryManager : MonoBehaviour
 {
@@ -36,10 +38,10 @@ public class InventoryManager : MonoBehaviour
         foreach (ItemData item in Items)
         {
             GameObject obj = Instantiate(InventoryItemPrefab, ItemContent);
-            var itemName = obj.transform.Find("ItemName").GetComponent<Text>();
+            var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            var itemStacks = obj.transform.Find("ItemStacks").GetComponent<Text>();
-            var itemDescription = obj.transform.Find("ItemDescription").GetComponent<Text>();
+            var itemStacks = obj.transform.Find("ItemStacks").GetComponent<TMP_Text>();
+            var itemDescription = obj.transform.Find("ItemDescription").GetComponent<TMP_Text>();
 
 
             itemName.text = item.itemName;

@@ -723,6 +723,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6bc88a3329bf714a9b16ba6aa87b496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  enemyChanceSpawn: 0
   navMeshAgent: {fileID: 5755593629760698913}
   timeBetweenHit: 0.75
   startWaitTime: 4
@@ -760,14 +762,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 1
   _currentMaxHealth: 1
-  _currentShield: 250
-  _currentMaxShield: 250
-  _shieldRechargeAmount: 5
-  _shieldRechargeRate: 10
-  _shieldRechargeCooldown: 3
+  _currentShield: 150
+  _currentMaxShield: 150
+  _shieldRechargeAmount: 2
+  _shieldRechargeCooldown: 0
   _healthbar: {fileID: 6942027065737672606}
   _shieldbar: {fileID: 8455151136229764265}
-  enemySpawner: {fileID: 0}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6872470719640066739
 GameObject:

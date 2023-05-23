@@ -21,6 +21,7 @@ public class WaveUI : MonoBehaviour {
 
     }
 
+
     private void Update() {
 
         waveText.text = "Wave " + gameManager.waveNumber.ToString();

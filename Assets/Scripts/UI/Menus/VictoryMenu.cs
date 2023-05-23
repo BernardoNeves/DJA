@@ -8,24 +8,6 @@ public class VictoryMenu : MonoBehaviour {
     public GameObject victoryMenu;
 
     private bool isPaused = false;
-/*
-    void Start () {
-
-        victoryMenu.SetActive(false);
-
-    }
-
-
-    void Update () {
-
-        if (GameManager.instance.GameWon) {
-
-            Victory();
-
-        }
-    
-    }
-*/
 
     public void Victory () {
 

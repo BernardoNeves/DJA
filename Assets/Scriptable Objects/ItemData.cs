@@ -7,9 +7,9 @@ public class ItemData : ScriptableObject
 {
 
     [Header("Info")]
-    public string itemName;
     public Sprite itemIcon;
+    public string itemName;
+    public string itemDescription;
     public int itemDropChance;
     public int itemStacks;
-    public string itemDescription;
 }

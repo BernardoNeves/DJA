@@ -40,20 +40,6 @@ public class WeaponSwitching : MonoBehaviour {
     private void Update() {
 
         int previousSelectedWeapon = selectedWeapon;
-
-        /*
-        for (int i = 0; i < keys.Length; i++) {
-
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime) {
-
-                selectedWeapon = i;
-
-            }
-
-        }
-
-        if (previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
-        */
         if (_input.weaponSwap >= 1 || _input.weaponSwap <= -1)
         {
             if (selectedWeapon == 0)

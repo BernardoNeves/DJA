@@ -6,7 +6,7 @@ public class Healthbar : MonoBehaviour {
 
     Slider _healthSlider;
     TMP_Text _healthText;
-    private float _slideSpeed = 500;
+    private float _slideSpeed = 400;
     private float _target = 100;
 
     private void Start() {

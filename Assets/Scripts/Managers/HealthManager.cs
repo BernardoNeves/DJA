@@ -9,17 +9,16 @@ public abstract class HealthManager : MonoBehaviour
     [Header("Health")]
     public float _currentHealth;
     public float _currentMaxHealth;
+
     [Header("Shield")]
     public float _currentShield;
     public float _currentMaxShield;
+
+    [Header("Shield Regenaration")]
     public float _shieldRechargeAmount;
-    public float _shieldRechargeRate;
     public float _shieldRechargeCooldown;
 
     private float _timeSinceLastDamage = 0f;
-
-
-    [SerializeField]
 
     public float Health
     {
@@ -69,14 +68,15 @@ public abstract class HealthManager : MonoBehaviour
         }
     }
 
-    public HealthManager(float health, float maxHealth)
+    public HealthManager(float health, float maxHealth, float shield, float maxShield)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;
-        if (_currentHealth > _currentMaxHealth)
-        {
-            _currentHealth = _currentMaxHealth;
-        }
+        CheckMaxHealth();
+
+        _currentShield = shield;
+        _currentMaxShield = maxShield;
+        CheckMaxShield();
     }
 
     public virtual void Start()
@@ -86,81 +86,80 @@ public abstract class HealthManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (_currentHealth < 0)
-        {
-            _currentHealth = 0;
-        }
-        if (_currentHealth > _currentMaxHealth)
-        {
-            _currentHealth = _currentMaxHealth;
-        }
-
-        if (_currentShield < 0)
-        {
-            _currentShield = 0;
-        }
-        if (_currentShield > _currentMaxShield)
-        {
-            _currentShield = _currentMaxShield;
-        }
         _timeSinceLastDamage += Time.deltaTime;
     }
 
     public virtual void Damage(float damageAmount)
     {
+        DamageShield(damageAmount);
+    }
+
+    private void DamageShield(float damageAmount)
+    {
         _timeSinceLastDamage = 0f;
-
-        if (_currentShield > 0)
-        {
-            _currentShield -= damageAmount;
-        }
-        if (_currentShield <= 0)
-        {
-            _currentShield = 0;
-
-            if (_currentHealth > 0)
-            {
-                _currentHealth -= damageAmount;
-            }
-            if (_currentHealth <= 0)
-            {
-                _currentHealth = 0;
-                OnDeath();
-            }
-        }
+        _currentShield -= damageAmount;
+        CheckMinShield();
+    }
+    private void DamageHealth(float damageAmount)
+    {
+        _currentHealth -= damageAmount;
+        CheckMinHealth();
     }
 
     public virtual void Heal(float healAmount)
     {
-        if (_currentHealth < _currentMaxHealth)
+        _currentHealth += healAmount;
+        CheckMaxHealth();
+    }
+
+    private void CheckMaxShield()
+    {
+        if (_currentShield > _currentMaxShield)
         {
-            _currentHealth += healAmount;
+            _currentShield = _currentMaxShield;
         }
-        else if (_currentHealth > _currentMaxHealth)
+    }
+
+    private void CheckMinShield()
+    {
+        if (_currentShield <= 0)
+        {
+            DamageHealth(-_currentShield);
+            _currentShield = 0;
+        }
+    }
+    private void CheckMaxHealth()
+    {
+        if (_currentHealth > _currentMaxHealth)
         {
             _currentHealth = _currentMaxHealth;
         }
     }
+    private void CheckMinHealth()
+    {
+        if (_currentHealth <= 0)
+        {
+            OnDeath();
+        }
+    }
 
-    IEnumerator ShieldRegen()
+    private IEnumerator ShieldRegen()
     {
         if (_timeSinceLastDamage >= _shieldRechargeCooldown)
         {
-            if (_currentShield < _currentMaxShield)
-            {
-                _currentShield += _shieldRechargeAmount;
-            }
-            else if (_currentShield > _currentMaxShield)
-            {
-                _currentShield = _currentMaxShield;
-            }
+            _currentShield += _shieldRechargeAmount;
+            CheckMaxShield();
         }
-        yield return new WaitForSeconds(1/_shieldRechargeRate);
+        yield return new WaitForSeconds(0.1f);
         StartCoroutine(ShieldRegen());
     }
 
     public virtual void OnDeath()
     {
+        _currentShield = 0; 
+        _currentHealth = 0;
+        foreach (Transform child in gameObject.transform)
+            child.gameObject.transform.parent = null;
         Destroy(gameObject);
     }
 

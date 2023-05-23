@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerHealth : HealthManager, HealthInterface
 {
+    [Header("UI")]
     [SerializeField] Healthbar _healthbar;
     [SerializeField] Shieldbar _shieldbar;
 
+    [Header("Inventory")]
     public List<ItemStack> itemList = new List<ItemStack>();
 
-    public PlayerHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth)
+    public PlayerHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth, shield, maxShield)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;

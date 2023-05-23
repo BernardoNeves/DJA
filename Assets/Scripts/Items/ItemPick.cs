@@ -43,11 +43,6 @@ public class ItemPick : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameManager.instance.Player.GetComponent<StarterAssets.StarterAssetsInputs>().cursorInputForLook = true;
         GameManager.instance.ChestUI.SetActive(false);
-
-        foreach (Transform item in GameManager.instance.ChestContent)
-        {
-            Destroy(item.gameObject);
-        }
     }
 
     public Item AssignItem()

@@ -6,13 +6,7 @@ using TMPro;
 
 public class chestOpen : MonoBehaviour, InteractableInterface
 {
-    //public void Interact()
-    //{
-    //    GetComponent<ItemDrop>().InstantiateDrop(transform.position);
-    //    Destroy(gameObject);
-    //}
     public List<ItemData> Drops = new List<ItemData>();
-    //public Transform Content = GameManager.instance.ChestContent;
     public GameObject ChestItemPrefab;
 
 

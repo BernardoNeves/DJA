@@ -6,10 +6,12 @@ using TMPro;
 
 public class EnemyHealth : HealthManager, HealthInterface
 {
+    [Header("UI")]
     [SerializeField] Healthbar _healthbar;
     [SerializeField] Shieldbar _shieldbar;
-    public EnemySpawner enemySpawner;
     public GameObject damageText;
+
+    private EnemySpawner enemySpawner;
 
     public override void Start()
     {
@@ -38,7 +40,7 @@ public class EnemyHealth : HealthManager, HealthInterface
         }
     }
 
-    public EnemyHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth)
+    public EnemyHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth, shield, maxShield)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;

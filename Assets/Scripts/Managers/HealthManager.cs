@@ -158,8 +158,6 @@ public abstract class HealthManager : MonoBehaviour
     {
         _currentShield = 0; 
         _currentHealth = 0;
-        foreach (Transform child in gameObject.transform)
-            child.gameObject.transform.parent = null;
         Destroy(gameObject);
     }
 

@@ -70,7 +70,7 @@ namespace StarterAssets
 
 		public void OnPause(InputValue value)
         {
-			PauseInput(value.isPressed);
+			GameManager.instance.PauseMenu();
         }
 
 //#endif
@@ -114,11 +114,6 @@ namespace StarterAssets
 		public void WeaponSwapInput(float newWeaponSwapState)
 		{
 			weaponSwap = newWeaponSwapState;
-		}
-
-		public void PauseInput(bool newPauseState)
-		{
-			pause = newPauseState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

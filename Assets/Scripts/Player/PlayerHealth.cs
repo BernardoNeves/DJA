@@ -42,7 +42,7 @@ public class PlayerHealth : HealthManager, HealthInterface
 
     public override void OnDeath()
     {
-        Debug.Log("Dead");
+        GameManager.instance.DeathMenu();
     }
 
     IEnumerator CallItemUpdate()

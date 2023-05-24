@@ -8,14 +8,10 @@ using TMPro;
 public class ItemInformation : MonoBehaviour
 {
     public GameObject ChestItemPrefab;
-    private Transform ItemContent;
     private GameObject Panel;
-
-
     private void Start()
     {
-        ItemContent = GameManager.instance.Canvas.transform.Find("ItemInfo");
-        Panel = GameManager.instance.Panel;
+        Panel = GameManager.instance.ItemInfo;
     }
 
     private void Update()
@@ -32,14 +28,14 @@ public class ItemInformation : MonoBehaviour
 
     public void ItemShowInfo()
     {
-        foreach (Transform item in ItemContent)
+        foreach (Transform item in Panel.transform)
         {
             Destroy(item.gameObject);
         }
 
         
 
-        GameObject obj = Instantiate(ChestItemPrefab, ItemContent.transform.position, Quaternion.identity, ItemContent.transform);
+        GameObject obj = Instantiate(ChestItemPrefab, Panel.transform.position, Quaternion.identity, Panel.transform);
         var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
         var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
         var itemStacks = obj.transform.Find("ItemStacks").GetComponent<TMP_Text>();

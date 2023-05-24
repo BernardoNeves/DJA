@@ -4,20 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenu : MonoBehaviour { 
+public class MainMenu : MonoBehaviour {
 
-   public void StartGame () {
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+    public void StartGame()
+    {
         SceneManager.LoadScene("Game");
-
     }
 
-    public void ExitGame () {
-
+    public void ExitGame ()
+    {
         Application.Quit();
-
     }
-
 }

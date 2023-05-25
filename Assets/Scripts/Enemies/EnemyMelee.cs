@@ -77,8 +77,8 @@ public class EnemyMelee : MonoBehaviour {
         if (!_isPatrol) {
 
             Chasing();
-            Vector3 targetpos = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
-            transform.LookAt(targetpos);
+
+            transform.LookAt(playerTransform);
 
         } else {
 

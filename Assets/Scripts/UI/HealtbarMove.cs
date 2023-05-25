@@ -7,12 +7,12 @@ public class HealtbarMove : MonoBehaviour
 {
     private Camera _cam;
 
-    void Start()
+    private void Start()
     {
         _cam = Camera.main;
     }
 
-    void Update()
+    private void Update()
     {
         transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
     }

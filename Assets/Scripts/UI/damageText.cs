@@ -9,7 +9,7 @@ public class damageText : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, destroyTime);
-        transform.localPosition += new Vector3(Random.Range(-1f, 1f) ,0 ,0);
+        transform.localPosition += new Vector3(Random.Range(-1f, 1f), 0, 0);
     }
 
     private void Update()

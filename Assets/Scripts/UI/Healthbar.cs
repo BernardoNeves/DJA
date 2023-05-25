@@ -4,28 +4,27 @@ using TMPro;
 
 public class Healthbar : MonoBehaviour {
 
-    Slider _healthSlider;
-    TMP_Text _healthText;
+    Slider _slider;
+    TMP_Text _Text;
     private float _slideSpeed = 400;
     private float _target = 100;
 
     private void Start() {
-        _healthText = GetComponentInChildren<TMP_Text>();
-        _healthSlider = GetComponent<Slider>();
+        _Text = GetComponentInChildren<TMP_Text>();
+        _slider = GetComponent<Slider>();
     }
 
-    public void SetMaxHealth(float maxHealth) {
-        _healthSlider.maxValue = maxHealth;
+    public void SetMax(float max) {
+        _slider.maxValue = max;
     }
 
-    public void SetHealth(float health) {
-        _target = health;
+    public void SetCurrent(float current) {
+        _target = current;
     }
 
     private void FixedUpdate()
     {
-        _healthSlider.value = Mathf.MoveTowards(_healthSlider.value, _target, _slideSpeed * Time.deltaTime);
-        _healthText.text = Mathf.RoundToInt(_healthSlider.value).ToString() + "/" + _healthSlider.maxValue.ToString();
-
+        _slider.value = Mathf.MoveTowards(_slider.value, _target, _slideSpeed * Time.deltaTime);
+        _Text.text = Mathf.RoundToInt(_slider.value).ToString() + "/" + _slider.maxValue.ToString();
     }
 }   

@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface HealthInterface
+{
 
-[System.Serializable]
-public abstract class HealthManager : MonoBehaviour
+    public void Damage(float damageAmount);
+
+    public void Heal(float healAmount);
+
+}
+
+public abstract class HealthManager : MonoBehaviour, HealthInterface
 {
     [Header("Health")]
     public float _currentHealth;

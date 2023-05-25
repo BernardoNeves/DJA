@@ -13,12 +13,6 @@ public class PlayerBehaviour : MonoBehaviour
     public static Action reloadInput;
 
 
-    private void Start()
-    {
-        _input = transform.root.GetComponent<StarterAssetsInputs>();
-
-    }
-
     void Update()
     {
         if (_input.interact)

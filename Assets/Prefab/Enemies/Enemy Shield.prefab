@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8078104336095391665}
   - component: {fileID: 7053698440515959833}
-  - component: {fileID: 8455151136229764265}
+  - component: {fileID: 8335680508528142215}
   m_Layer: 5
   m_Name: SB_Fill
   m_TagString: Untagged
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8455151136229764265
+--- !u!114 &8335680508528142215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1210425852655213115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f0eef86df040f04c95e8e77b2da1565, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c8f431b0e9306b48ba417a98acaf82a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1569448031469765288
@@ -767,7 +767,7 @@ MonoBehaviour:
   _shieldRechargeAmount: 2
   _shieldRechargeCooldown: 0
   _healthbar: {fileID: 6942027065737672606}
-  _shieldbar: {fileID: 8455151136229764265}
+  _shieldbar: {fileID: 8335680508528142215}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6872470719640066739
 GameObject:

@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class EnemyHealth : HealthManager, HealthInterface
+public class EnemyHealth : HealthManager
 {
     [Header("UI")]
     [SerializeField] Healthbar _healthbar;
-    [SerializeField] Shieldbar _shieldbar;
+    [SerializeField] Healthbar _shieldbar;
     public GameObject damageText;
 
     private EnemySpawner enemySpawner;
@@ -16,7 +16,7 @@ public class EnemyHealth : HealthManager, HealthInterface
     public override void Start()
     {
         base.Start();
-        enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     
     }
 
@@ -30,13 +30,13 @@ public class EnemyHealth : HealthManager, HealthInterface
     public override void Update()
     {
         base.Update();
-        _healthbar.SetHealth(Health);
-        _healthbar.SetMaxHealth(MaxHealth);
+        _healthbar.SetCurrent(Health);
+        _healthbar.SetMax(MaxHealth);
 
         if (_shieldbar)
         {
-            _shieldbar.SetShield(Shield);
-            _shieldbar.SetMaxShield(MaxShield);
+            _shieldbar.SetCurrent(Shield);
+            _shieldbar.SetMax(MaxShield);
         }
     }
 

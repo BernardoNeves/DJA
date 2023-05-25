@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public interface InteractableInterface
+{
+    public void Interact();
+
+}
+
 public class chestOpen : MonoBehaviour, InteractableInterface
 {
     public List<ItemData> Drops = new List<ItemData>();

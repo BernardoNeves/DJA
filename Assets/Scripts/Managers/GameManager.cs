@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -19,11 +21,12 @@ public class GameManager : MonoBehaviour
     public Transform _chestContent;
     public GameObject _menuPause; 
     public GameObject _menuDeath;
-    public GameObject _menuVictory; 
+    public GameObject _menuVictory;
 
 
 
 
+    public TMP_Text waveText;
 
     public int waveNumber = 0;
 
@@ -151,6 +154,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 waveNumber++;
+                waveText.text = "Wave " + waveNumber;
 
                 if (waveNumber % 10 == 0)
                 {

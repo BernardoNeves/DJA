@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : HealthManager, HealthInterface
+public class PlayerHealth : HealthManager
 {
     [Header("UI")]
     [SerializeField] Healthbar _healthbar;
-    [SerializeField] Shieldbar _shieldbar;
+    [SerializeField] Healthbar _shieldbar;
 
     [Header("Inventory")]
     public List<ItemStack> itemList = new List<ItemStack>();
@@ -32,11 +32,11 @@ public class PlayerHealth : HealthManager, HealthInterface
     public override void Update()
     {
         base.Update();
-        _healthbar.SetHealth(Health);
-        _healthbar.SetMaxHealth(MaxHealth);
+        _healthbar.SetCurrent(Health);
+        _healthbar.SetMax(MaxHealth);
 
-        _shieldbar.SetShield(Shield);
-        _shieldbar.SetMaxShield(MaxShield);
+        _shieldbar.SetCurrent(Shield);
+        _shieldbar.SetMax(MaxShield);
 
     }
 

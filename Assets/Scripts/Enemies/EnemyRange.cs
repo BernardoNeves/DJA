@@ -96,13 +96,15 @@ public class EnemyRange : MonoBehaviour {
 
             Stop();
 
-            transform.LookAt(playerTransform);
+            Vector3 targetpos = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
+            transform.LookAt(targetpos);
 
         } else if (!_isPatrol) {
 
             ChasePlayer();
 
-            transform.LookAt(playerTransform);
+            Vector3 targetpos = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
+            transform.LookAt(targetpos);
 
         } else  {
 

@@ -6,7 +6,7 @@ using StarterAssets;
 
 public class WeaponSwitching : MonoBehaviour {
 
-    public StarterAssetsInputs _input;
+    public Inputs _input;
 
     [Header("References")]
     [SerializeField] private Transform[] weapons;
@@ -19,14 +19,14 @@ public class WeaponSwitching : MonoBehaviour {
 
     private void Start() {
 
-        SetWeapons();
+        //SetWeapons();
         Select(selectedWeapon);
 
         timeSinceLastSwitch = 0f;
 
     }
 
-    private void SetWeapons() {
+    private void SetWeapons(){
 
         weapons = new Transform[transform.childCount];
 

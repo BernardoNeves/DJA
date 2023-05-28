@@ -37,11 +37,7 @@ public class ItemPick : MonoBehaviour
         GameManager.instance.Player.GetComponent<PlayerHealth>().CallItemOnPickup();
         InventoryManager.Instance.ListItems();
 
-
-        Time.timeScale = 1f;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        GameManager.instance.Player.GetComponent<StarterAssets.StarterAssetsInputs>().cursorInputForLook = true;
+        GameManager.instance.CursorToggle(false);
         GameManager.instance.ChestUI.SetActive(false);
     }
 

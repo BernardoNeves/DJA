@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
     public void CursorToggle(bool visible)
     {
         Cursor.visible = visible;
-        Player.GetComponent<StarterAssets.StarterAssetsInputs>().cursorInputForLook = !visible;
+        Player.GetComponent<Inputs>().cursorInputForLook = !visible;
 
         if (visible)
         {

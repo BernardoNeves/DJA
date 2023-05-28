@@ -7,16 +7,19 @@ using TMPro;
 public class EnemyHealth : HealthManager
 {
     [Header("UI")]
-    [SerializeField] Healthbar _healthbar;
-    [SerializeField] Healthbar _shieldbar;
+    public Healthbar _healthbar;
+    public Healthbar _shieldbar;
     public GameObject damageText;
 
+    private EnemyMelee enemyMelee;
     private EnemySpawner enemySpawner;
+
 
     public override void Start()
     {
         base.Start();
-        enemySpawner = FindObjectOfType<EnemySpawner>();
+        enemyMelee = GetComponent<EnemyMelee>();
+        enemySpawner = GameManager.instance.enemySpawner;
     
     }
 
@@ -55,6 +58,7 @@ public class EnemyHealth : HealthManager
 
     public override void OnDeath()
     {
+        Destroy(enemyMelee);
         base.OnDeath();
         enemySpawner.enemyCount--;
     }

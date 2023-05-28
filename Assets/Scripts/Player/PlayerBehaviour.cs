@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
 
     [SerializeField] private Transform PlayerCamera;
-    public StarterAssetsInputs _input;
+    public Inputs _input;
     public static Action shootInput;
     public static Action reloadInput;
 

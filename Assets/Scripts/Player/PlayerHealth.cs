@@ -40,6 +40,10 @@ public class PlayerHealth : HealthManager
 
     }
 
+    public override void Damage(float damageAmount)
+    {
+        DamageShield(damageAmount);
+    }
     public override void OnDeath()
     {
         GameManager.instance.DeathMenu();

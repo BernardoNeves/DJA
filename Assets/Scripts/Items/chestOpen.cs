@@ -48,10 +48,8 @@ public class chestOpen : MonoBehaviour, InteractableInterface
 
             return;
         }
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        GameManager.instance.Player.GetComponent<StarterAssets.StarterAssetsInputs>().cursorInputForLook = false;
-        Time.timeScale = 0f;
+
+        GameManager.instance.CursorToggle(true);
         GameManager.instance.ChestUI.SetActive(true);
         ListItems(CurrentChestItems);
 

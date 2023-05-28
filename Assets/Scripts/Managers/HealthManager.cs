@@ -25,6 +25,9 @@ public abstract class HealthManager : MonoBehaviour, HealthInterface
     public float _shieldRechargeAmount;
     public float _shieldRechargeCooldown;
 
+    [Header("Animator")]
+    public Animator _animator;
+
     private float _timeSinceLastDamage = 0f;
 
     public float Health
@@ -98,16 +101,17 @@ public abstract class HealthManager : MonoBehaviour, HealthInterface
 
     public virtual void Damage(float damageAmount)
     {
+        _animator.SetTrigger("Hit");
         DamageShield(damageAmount);
     }
 
-    private void DamageShield(float damageAmount)
+    public void DamageShield(float damageAmount)
     {
         _timeSinceLastDamage = 0f;
         _currentShield -= damageAmount;
         CheckMinShield();
     }
-    private void DamageHealth(float damageAmount)
+    public void DamageHealth(float damageAmount)
     {
         _currentHealth -= damageAmount;
         CheckMinHealth();
@@ -165,7 +169,8 @@ public abstract class HealthManager : MonoBehaviour, HealthInterface
     {
         _currentShield = 0; 
         _currentHealth = 0;
-        Destroy(gameObject);
+        _animator.SetTrigger("Die");
+        Destroy(gameObject, 1.6f);
     }
 
 }

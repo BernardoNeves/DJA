@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 6435392197609452035}
   - component: {fileID: 6435392197609452038}
   - component: {fileID: 6435392197609452039}
-  - component: {fileID: 6435392197609452032}
+  - component: {fileID: -4283337395180270897}
   - component: {fileID: 6435392197609452037}
   m_Layer: 0
   m_Name: Enemy Doggy
@@ -333,7 +333,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6435392197609452032
+--- !u!114 &-4283337395180270897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,16 +342,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 6435392197609452045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bc88a3329bf714a9b16ba6aa87b496, type: 3}
+  m_Script: {fileID: 11500000, guid: b2b8e4207eb1ffb4db1b6753416f5508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  bigProjectilePrefab: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  enemyChanceSpawn: 70
+  minionPrefab: {fileID: 0}
+  timeBetweenSummon: 10
+  enemySummonQuantity: 5
+  shootDistance: 0
+  throwDistance: 0
+  enemyDamage: 10
+  enemyHealth: {fileID: 0}
+  enemyType: 4
+  timeBetweenShot: 1.5
   navMeshAgent: {fileID: 6435392197609452039}
-  timeBetweenHit: 1.5
   startWaitTime: 4
   timeToRotate: 2
   speedWalk: 10
   speedRun: 12
-  viewRadius: 20
+  viewRadius: 15
   viewAngle: 90
   playerMask:
     serializedVersion: 2
@@ -361,10 +374,9 @@ MonoBehaviour:
     m_Bits: 128
   meshResolution: 1
   edgeInteractions: 4
-  enemyDamage: 10
   waypoints:
-  - {fileID: 6435392199593096707}
   - {fileID: 6435392198194599777}
+  - {fileID: 6435392199593096707}
 --- !u!114 &6435392197609452037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +397,7 @@ MonoBehaviour:
   _shieldRechargeRate: 0
   _shieldRechargeCooldown: 0
   _healthbar: {fileID: 8559067070598692792}
+  _shieldbar: {fileID: 0}
   enemySpawner: {fileID: 0}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6435392198194599778

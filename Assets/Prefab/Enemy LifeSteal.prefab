@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 5755593629760698917}
   - component: {fileID: 5755593629760698912}
   - component: {fileID: 5755593629760698913}
-  - component: {fileID: 5755593629760698918}
+  - component: {fileID: 4544336456169727035}
   - component: {fileID: 5755593629760698915}
   m_Layer: 0
   m_Name: Enemy LifeSteal
@@ -395,7 +395,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5755593629760698918
+--- !u!114 &4544336456169727035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,18 +404,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5755593629760698923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bc88a3329bf714a9b16ba6aa87b496, type: 3}
+  m_Script: {fileID: 11500000, guid: b2b8e4207eb1ffb4db1b6753416f5508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  bigProjectilePrefab: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  enemyChanceSpawn: 30
+  minionPrefab: {fileID: 0}
+  timeBetweenSummon: 10
+  enemySummonQuantity: 5
+  shootDistance: 0
+  throwDistance: 0
+  enemyDamage: 8
+  enemyHealth: {fileID: 5755593629760698915}
+  enemyType: 5
+  timeBetweenShot: 0.75
   navMeshAgent: {fileID: 5755593629760698913}
-  timeBetweenHit: 0.75
   startWaitTime: 4
   timeToRotate: 2
   speedWalk: 6
   speedRun: 8
-  enemyHealth: {fileID: 5755593629760698915}
-  enemyType: 2
-  viewRadius: 20
+  viewRadius: 15
   viewAngle: 90
   playerMask:
     serializedVersion: 2
@@ -425,10 +436,9 @@ MonoBehaviour:
     m_Bits: 128
   meshResolution: 1
   edgeInteractions: 4
-  enemyDamage: 8
   waypoints:
-  - {fileID: 5755593628372647461}
   - {fileID: 5755593629234257735}
+  - {fileID: 5755593628372647461}
 --- !u!114 &5755593629760698915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +459,7 @@ MonoBehaviour:
   _shieldRechargeRate: 0
   _shieldRechargeCooldown: 0
   _healthbar: {fileID: 6942027065737672606}
+  _shieldbar: {fileID: 0}
   enemySpawner: {fileID: 0}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6949761040387056560

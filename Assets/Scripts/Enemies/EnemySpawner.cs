@@ -1,18 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
 
-    public GameObject enemyMeleePrefab;
-    public GameObject enemyRangedPrefab;
-    public GameObject enemyGrenadePrefab;
-    public GameObject enemyMinionPrefab;
-    public GameObject enemyLifeStealPrefab;
-    public GameObject enemyShieldPrefab;
-    public GameObject enemyExplosionPrefab;
+    public List<EnemyRange> Spawns = new List<EnemyRange>();
+    public List<EnemyRange> SpawnsBoss = new List<EnemyRange>();
 
     public int enemiesPerWave = 3;
     public float spawnInterval = 1f;
@@ -35,6 +31,33 @@ public class EnemySpawner : MonoBehaviour
     private int xPos;
     private int yPos;
     private int enemyType;
+
+    EnemyRange GetEnemySpawn(List<EnemyRange> CheckSpawn) {
+
+        int randomNumber = Random.Range(0, 101);
+
+        List<EnemyRange> possibleEnemies = new List<EnemyRange>();
+
+        foreach(EnemyRange enemy in CheckSpawn) {
+
+            if (randomNumber <= enemy.enemyChanceSpawn) {
+
+                possibleEnemies.Add(enemy);
+
+            }
+
+        }
+
+        if (possibleEnemies.Count > 0) {
+
+            EnemyRange enemySpawned = possibleEnemies[Random.Range(0, possibleEnemies.Count)];
+            return enemySpawned;
+
+        }
+
+        return null;
+
+    }
 
     public IEnumerator SpawnWave()
     {
@@ -82,38 +105,11 @@ public class EnemySpawner : MonoBehaviour
         yPos = Random.Range(-20, 21);
         enemyType = Random.Range(1, 8);
 
-        if (enemyType == 1)
-        {
+        EnemyRange enemySpawned = GetEnemySpawn(Spawns);
 
-            Instantiate(enemyMeleePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
+        Instantiate(enemySpawned, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
-        } else if (enemyType == 2) {
-
-            Instantiate(enemyRangedPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        } else if (enemyType == 3) {
-
-            Instantiate(enemyGrenadePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        } else if (enemyType == 4) {
-
-            Instantiate(enemyMinionPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        } else if (enemyType == 5) {
-
-            Instantiate(enemyLifeStealPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        } else if (enemyType == 6) {
-
-            Instantiate(enemyShieldPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        } else if (enemyType == 7) {
-
-            Instantiate(enemyExplosionPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        }
-
-            enemyCount++;
+        enemyCount++;
         enemiesSpawnedForWave++;
 
     }
@@ -125,15 +121,9 @@ public class EnemySpawner : MonoBehaviour
         xPos = Random.Range(-20, 21);
         enemyType = Random.Range(1, 3);
 
-        if (enemyType == 1) {
+        EnemyRange bossSpawned = GetEnemySpawn(SpawnsBoss);
 
-            Instantiate(bossMeleePrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        } else if (enemyType == 2) {
-
-            Instantiate(bossSummonPrefab, new Vector3(xPos, 2, yPos), Quaternion.identity);
-
-        }
+        Instantiate(bossSpawned, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
         enemyCount++;
         bossesSpawnedForWave++;

@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4268811160059188804}
   - component: {fileID: 4268811160059188801}
   - component: {fileID: 4268811160059188800}
-  - component: {fileID: 4268811160059188807}
+  - component: {fileID: 7681690757125770157}
   - component: {fileID: 4268811160059188802}
   m_Layer: 0
   m_Name: Enemy Boss
@@ -220,7 +220,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4268811160059188807
+--- !u!114 &7681690757125770157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,11 +229,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 4268811160059188810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bc88a3329bf714a9b16ba6aa87b496, type: 3}
+  m_Script: {fileID: 11500000, guid: b2b8e4207eb1ffb4db1b6753416f5508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  bigProjectilePrefab: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  enemyChanceSpawn: 100
+  minionPrefab: {fileID: 0}
+  timeBetweenSummon: 10
+  enemySummonQuantity: 5
+  shootDistance: 0
+  throwDistance: 0
+  enemyDamage: 10
+  enemyHealth: {fileID: 0}
+  enemyType: 4
+  timeBetweenShot: 0.5
   navMeshAgent: {fileID: 4268811160059188800}
-  timeBetweenHit: 0.5
   startWaitTime: 4
   timeToRotate: 2
   speedWalk: 4
@@ -248,10 +261,9 @@ MonoBehaviour:
     m_Bits: 128
   meshResolution: 1
   edgeInteractions: 4
-  enemyDamage: 10
   waypoints:
-  - {fileID: 4268811162051220036}
   - {fileID: 4268811160652641062}
+  - {fileID: 4268811162051220036}
 --- !u!114 &4268811160059188802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +280,11 @@ MonoBehaviour:
   _currentMaxHealth: 1000
   _currentShield: 0
   _currentMaxShield: 0
+  _shieldRechargeAmount: 0
+  _shieldRechargeRate: 0
+  _shieldRechargeCooldown: 0
   _healthbar: {fileID: 7339744823645177946}
+  _shieldbar: {fileID: 0}
   enemySpawner: {fileID: 0}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &4268811160652641061

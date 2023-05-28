@@ -397,8 +397,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3896947069321208781, guid: e837d1126fd807849aba1c469b9190ba, type: 3}
   grenadePrefab: {fileID: 3896947069321208781, guid: 442c2804f21f1224f9b921dca4f660ac, type: 3}
+  bigProjectilePrefab: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  enemyChanceSpawn: 80
+  minionPrefab: {fileID: 0}
+  timeBetweenSummon: 10
+  enemySummonQuantity: 5
   shootDistance: 15
   throwDistance: 0
+  enemyDamage: 0
+  enemyHealth: {fileID: 0}
   enemyType: 1
   timeBetweenShot: 0.25
   navMeshAgent: {fileID: 8598965432235675171}
@@ -435,7 +443,11 @@ MonoBehaviour:
   _currentMaxHealth: 60
   _currentShield: 0
   _currentMaxShield: 0
+  _shieldRechargeAmount: 0
+  _shieldRechargeRate: 0
+  _shieldRechargeCooldown: 0
   _healthbar: {fileID: 4602120084149413327}
+  _shieldbar: {fileID: 0}
   enemySpawner: {fileID: 0}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
 --- !u!1 &6422760165929307105

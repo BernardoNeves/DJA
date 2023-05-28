@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4764674331880083626}
   - component: {fileID: 4764674331880083602}
   - component: {fileID: 4764674331880083633}
-  - component: {fileID: 4764674331880084465}
+  - component: {fileID: 2375785197309287361}
   - component: {fileID: 4764674331880084468}
   m_Layer: 0
   m_Name: Enemy Melee
@@ -181,7 +181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 185128243797124550}
-  - {fileID: 3932559896462647872}
+  - {fileID: 5841486989264062177}
   - {fileID: 185128244626534465}
   - {fileID: 3436886256519830208}
   m_Father: {fileID: 0}
@@ -239,7 +239,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4764674331880084465
+--- !u!114 &2375785197309287361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,21 +248,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 4764674331880083505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bc88a3329bf714a9b16ba6aa87b496, type: 3}
+  m_Script: {fileID: 11500000, guid: b2b8e4207eb1ffb4db1b6753416f5508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  enemyChanceSpawn: 0
+  _animator: {fileID: 5841486989264062190}
+  projectilePrefab: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  bigProjectilePrefab: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  enemyChanceSpawn: 100
+  minionPrefab: {fileID: 0}
+  timeBetweenSummon: 10
+  enemySummonQuantity: 5
+  shootDistance: 0
+  throwDistance: 0
+  projectileSpeed: 0
+  enemyDamage: 8
+  enemyHealth: {fileID: 0}
+  enemyType: 4
+  timeBetweenShot: 0.75
   navMeshAgent: {fileID: 4764674331880083633}
-  timeBetweenHit: 0.75
   startWaitTime: 4
   timeToRotate: 2
-  speedWalk: 6
-  speedRun: 8
-  enemyHealth: {fileID: 0}
-  enemyType: 1
-  explosionPrefab: {fileID: 0}
-  viewRadius: 20
+  speedWalk: 4
+  speedRun: 6
+  viewRadius: 15
   viewAngle: 90
   playerMask:
     serializedVersion: 2
@@ -272,11 +282,9 @@ MonoBehaviour:
     m_Bits: 128
   meshResolution: 1
   edgeInteractions: 4
-  enemyDamage: 8
   waypoints:
   - {fileID: 4764674331880083674}
   - {fileID: 4764674331880083673}
-  _animator: {fileID: 3932559896462647887}
 --- !u!114 &4764674331880084468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,8 +303,7 @@ MonoBehaviour:
   _currentMaxShield: 0
   _shieldRechargeAmount: 0
   _shieldRechargeCooldown: 0
-  _animator: {fileID: 3932559896462647887}
-  enemyMelee: {fileID: 4764674331880084465}
+  _animator: {fileID: 5841486989264062190}
   _healthbar: {fileID: 2470381464786740955}
   _shieldbar: {fileID: 0}
   damageText: {fileID: 3399755589696963523, guid: 1e73a3b38d4737a4094e5cb44477cc44, type: 3}
@@ -452,7 +459,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3216734657734126553, guid: 7485396152826f54ea8587b4272b3768, type: 3}
   m_PrefabInstance: {fileID: 222478445188706585}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6652643869378769505
+--- !u!1001 &4310106808325543616
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -505,17 +512,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692625600654741548, guid: 57942f432a93c4349a3118f417759f21, type: 3}
       propertyPath: m_Name
-      value: EnemyWizard
+      value: Melee
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57942f432a93c4349a3118f417759f21, type: 3}
---- !u!4 &3932559896462647872 stripped
+--- !u!4 &5841486989264062177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7692625600654741537, guid: 57942f432a93c4349a3118f417759f21, type: 3}
-  m_PrefabInstance: {fileID: 6652643869378769505}
+  m_PrefabInstance: {fileID: 4310106808325543616}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3932559896462647887 stripped
+--- !u!95 &5841486989264062190 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7692625600654741550, guid: 57942f432a93c4349a3118f417759f21, type: 3}
-  m_PrefabInstance: {fileID: 6652643869378769505}
+  m_PrefabInstance: {fileID: 4310106808325543616}
   m_PrefabAsset: {fileID: 0}

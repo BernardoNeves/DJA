@@ -5,53 +5,63 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class EnemyRange : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
+
+    [Header("Animator")]
+    public Animator _animator;
 
     [Header("Prefabs")]
-    [SerializeField] public GameObject projectilePrefab;
-    [SerializeField] public GameObject grenadePrefab;
-    [SerializeField] public GameObject bigProjectilePrefab;
-    [SerializeField] public GameObject explosionPrefab;
+    public GameObject projectilePrefab;
+    public GameObject grenadePrefab;
+    public GameObject bigProjectilePrefab;
+    public GameObject explosionPrefab;
 
     [Header("Enemy Chance Spawn")]
-    [SerializeField] public int enemyChanceSpawn;
+    public int enemyChanceSpawn;
 
     [Header("Enemy Minions Boss")]
-    [SerializeField] public GameObject minionPrefab;
-    [SerializeField] public float timeBetweenSummon = 10f;
+    public GameObject minionPrefab;
+    public float timeBetweenSummon = 10f;
     private float timeSinceLastSummon = 0f;
-    [SerializeField] public int enemySummonQuantity = 5;
+    public int enemySummonQuantity = 5;
 
     [Header("Enemy Range")]
-    [SerializeField] public float shootDistance;
-    [SerializeField] public float throwDistance;
+    public float shootDistance;
+    public float throwDistance;
+    public float projectileSpeed;
 
     [Header("Enemy Melee")]
-    [SerializeField] public float enemyDamage;
-    [SerializeField] public EnemyHealth enemyHealth;
+    public float enemyDamage;
+    public EnemyHealth enemyHealth;
 
     [Header("Enemy Type")]
-    [SerializeField] public int enemyType = 1;
+    [Tooltip("1- Ranged\n" +
+        "2- Grenade\n" +
+        "3- Minion Boss\n" +
+        "4- Meele\n" +
+        "5- Lifesteal\n" +
+        "6- Terrorist\n")]
+    public int enemyType = 1;
 
     [Header("Enemy")]
     private Transform playerTransform;
-    [SerializeField] public float timeBetweenShot = 1f;
+    public float timeBetweenShot = 1f;
     private float timeSinceLastShot = 0f;
 
-    [SerializeField] public NavMeshAgent navMeshAgent;
-    [SerializeField] public float startWaitTime = 4;
-    [SerializeField] public float timeToRotate = 2;
-    [SerializeField] public float speedWalk = 4;
-    [SerializeField] public float speedRun = 6;
+    public NavMeshAgent navMeshAgent;
+    public float startWaitTime = 4;
+    public float timeToRotate = 2;
+    public float speedWalk = 4;
+    public float speedRun = 6;
 
-    [SerializeField] public float viewRadius = 15;
-    [SerializeField] public float viewAngle = 90;
-    [SerializeField] public LayerMask playerMask;
-    [SerializeField] public LayerMask obstacleMask;
-    [SerializeField] public float meshResolution = 1.0f;
-    [SerializeField] public int edgeInteractions = 4;
+    public float viewRadius = 15;
+    public float viewAngle = 90;
+    public LayerMask playerMask;
+    public LayerMask obstacleMask;
+    public float meshResolution = 1.0f;
+    public int edgeInteractions = 4;
 
-    [SerializeField] public Transform[] waypoints;
+    public Transform[] waypoints;
     private int _currentWaypointIndex;
 
     Vector3 playerLastPos = Vector3.zero;
@@ -294,6 +304,11 @@ public class EnemyRange : MonoBehaviour {
     }
 
     void Move(float speed) {
+        _animator.SetBool("Walk", true);
+        _animator.SetBool("Run", false);
+
+        if (speed == speedRun)
+            _animator.SetBool("Run", true);
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
@@ -301,6 +316,8 @@ public class EnemyRange : MonoBehaviour {
     }
 
     void Stop() {
+        _animator.SetBool("Walk", false);
+        _animator.SetBool("Run", false);
 
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
@@ -320,15 +337,15 @@ public class EnemyRange : MonoBehaviour {
 
             if (enemyType == 1)
             {
+                Vector3 throwOffset = new Vector3(0f, 1.025f, 0.1f);
+                Vector3 playerDirection = (playerTransform.position - transform.position).normalized;
+                GameObject projectile = Instantiate(projectilePrefab, transform.position + throwOffset, Quaternion.LookRotation(playerDirection));
 
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, transform);
-                Vector3 direction = (playerTransform.position - transform.position).normalized;
+                playerDirection.x *= projectileSpeed;
+                playerDirection.y *= projectileSpeed;
+                playerDirection.z *= projectileSpeed;
 
-                direction.x *= 100f;
-                direction.y += 0.2f;
-                direction.z *= 100f;
-
-                projectile.GetComponent<Rigidbody>().velocity = direction;
+                projectile.GetComponent<Rigidbody>().velocity = playerDirection;
 
                 timeSinceLastShot = 0;
 
@@ -341,7 +358,7 @@ public class EnemyRange : MonoBehaviour {
 
                 playerDirection.y += 0.5f;
 
-                GameObject grenade = Instantiate(grenadePrefab, transform.position + throwOffset, Quaternion.LookRotation(playerDirection), transform);
+                GameObject grenade = Instantiate(grenadePrefab, transform.position + throwOffset, Quaternion.LookRotation(playerDirection));
                 Rigidbody rigidbody = grenade.GetComponent<Rigidbody>();
                 rigidbody.AddForce(playerDirection * throwDistance, ForceMode.VelocityChange);
 
@@ -351,14 +368,14 @@ public class EnemyRange : MonoBehaviour {
             else if (enemyType == 3)
             {
 
-                GameObject projectile = Instantiate(bigProjectilePrefab, transform.position, Quaternion.identity, transform);
-                Vector3 direction = (playerTransform.position - transform.position).normalized;
+                Vector3 playerDirection = (playerTransform.position - transform.position).normalized;
+                GameObject projectile = Instantiate(bigProjectilePrefab, transform.position, Quaternion.LookRotation(playerDirection));
 
-                direction.x *= 10f;
-                direction.y -= 0.1f;
-                direction.z *= 10f;
+                playerDirection.x *= 10f;
+                playerDirection.y -= 0.1f;
+                playerDirection.z *= 10f;
 
-                projectile.GetComponent<Rigidbody>().velocity = direction;
+                projectile.GetComponent<Rigidbody>().velocity = playerDirection;
 
                 timeSinceLastShot = 0;
 
@@ -369,6 +386,7 @@ public class EnemyRange : MonoBehaviour {
     }
 
     private bool CanShot() {
+        _animator.SetTrigger("Attack");
 
         if (timeSinceLastShot < timeBetweenShot) {
 

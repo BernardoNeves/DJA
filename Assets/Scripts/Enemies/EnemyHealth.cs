@@ -11,14 +11,12 @@ public class EnemyHealth : HealthManager
     public Healthbar _shieldbar;
     public GameObject damageText;
 
-    private EnemyMelee enemyMelee;
     private EnemySpawner enemySpawner;
 
 
     public override void Start()
     {
         base.Start();
-        enemyMelee = GetComponent<EnemyMelee>();
         enemySpawner = GameManager.instance.enemySpawner;
     
     }
@@ -58,7 +56,6 @@ public class EnemyHealth : HealthManager
 
     public override void OnDeath()
     {
-        Destroy(enemyMelee);
         base.OnDeath();
         enemySpawner.enemyCount--;
     }

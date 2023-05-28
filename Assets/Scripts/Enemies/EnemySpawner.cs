@@ -7,15 +7,12 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
 
-    public List<EnemyRange> Spawns = new List<EnemyRange>();
-    public List<EnemyRange> SpawnsBoss = new List<EnemyRange>();
+    public List<EnemyController> Spawns = new List<EnemyController>();
+    public List<EnemyController> SpawnsBoss = new List<EnemyController>();
 
     public int enemiesPerWave = 3;
     public float spawnInterval = 1f;
     public float spawnDelay = 2f;
-
-    public GameObject bossMeleePrefab;
-    public GameObject bossSummonPrefab;
 
     public int bossPerWave = 0;
     public float spawnBossInterval = 3f;
@@ -32,13 +29,13 @@ public class EnemySpawner : MonoBehaviour
     private int yPos;
     private int enemyType;
 
-    EnemyRange GetEnemySpawn(List<EnemyRange> CheckSpawn) {
+    EnemyController GetEnemySpawn(List<EnemyController> CheckSpawn) {
 
         int randomNumber = Random.Range(0, 101);
 
-        List<EnemyRange> possibleEnemies = new List<EnemyRange>();
+        List<EnemyController> possibleEnemies = new List<EnemyController>();
 
-        foreach(EnemyRange enemy in CheckSpawn) {
+        foreach(EnemyController enemy in CheckSpawn) {
 
             if (randomNumber <= enemy.enemyChanceSpawn) {
 
@@ -50,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (possibleEnemies.Count > 0) {
 
-            EnemyRange enemySpawned = possibleEnemies[Random.Range(0, possibleEnemies.Count)];
+            EnemyController enemySpawned = possibleEnemies[Random.Range(0, possibleEnemies.Count)];
             return enemySpawned;
 
         }
@@ -105,7 +102,7 @@ public class EnemySpawner : MonoBehaviour
         yPos = Random.Range(-20, 21);
         enemyType = Random.Range(1, 8);
 
-        EnemyRange enemySpawned = GetEnemySpawn(Spawns);
+        EnemyController enemySpawned = GetEnemySpawn(Spawns);
 
         Instantiate(enemySpawned, new Vector3(xPos, 2, yPos), Quaternion.identity);
 
@@ -121,7 +118,7 @@ public class EnemySpawner : MonoBehaviour
         xPos = Random.Range(-20, 21);
         enemyType = Random.Range(1, 3);
 
-        EnemyRange bossSpawned = GetEnemySpawn(SpawnsBoss);
+        EnemyController bossSpawned = GetEnemySpawn(SpawnsBoss);
 
         Instantiate(bossSpawned, new Vector3(xPos, 2, yPos), Quaternion.identity);
 

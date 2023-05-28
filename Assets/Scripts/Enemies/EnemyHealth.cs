@@ -4,17 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class EnemyHealth : HealthManager, HealthInterface
+public class EnemyHealth : HealthManager
 {
-    [SerializeField] Healthbar _healthbar;
-    [SerializeField] Shieldbar _shieldbar;
-    public EnemySpawner enemySpawner;
+    [Header("UI")]
+    public Healthbar _healthbar;
+    public Healthbar _shieldbar;
     public GameObject damageText;
+
+    private EnemyMelee enemyMelee;
+    private EnemySpawner enemySpawner;
+
 
     public override void Start()
     {
         base.Start();
-        enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
+        enemyMelee = GetComponent<EnemyMelee>();
+        enemySpawner = GameManager.instance.enemySpawner;
     
     }
 
@@ -28,17 +33,17 @@ public class EnemyHealth : HealthManager, HealthInterface
     public override void Update()
     {
         base.Update();
-        _healthbar.SetHealth(Health);
-        _healthbar.SetMaxHealth(MaxHealth);
+        _healthbar.SetCurrent(Health);
+        _healthbar.SetMax(MaxHealth);
 
         if (_shieldbar)
         {
-            _shieldbar.SetShield(Shield);
-            _shieldbar.SetMaxShield(MaxShield);
+            _shieldbar.SetCurrent(Shield);
+            _shieldbar.SetMax(MaxShield);
         }
     }
 
-    public EnemyHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth)
+    public EnemyHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth, shield, maxShield)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;
@@ -53,6 +58,7 @@ public class EnemyHealth : HealthManager, HealthInterface
 
     public override void OnDeath()
     {
+        Destroy(enemyMelee);
         base.OnDeath();
         enemySpawner.enemyCount--;
     }

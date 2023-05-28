@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour {
     [SerializeField] public Transform PlayerCamera;
     [SerializeField] WeaponUI _weaponUI;
 
-    float timeSinceLastShot;
+    float timeSinceLastShot = 0;
 
     private void Awake()
     {

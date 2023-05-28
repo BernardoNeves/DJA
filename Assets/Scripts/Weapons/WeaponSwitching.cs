@@ -6,7 +6,7 @@ using StarterAssets;
 
 public class WeaponSwitching : MonoBehaviour {
 
-    public StarterAssetsInputs _input;
+    public Inputs _input;
 
     [Header("References")]
     [SerializeField] private Transform[] weapons;
@@ -19,14 +19,14 @@ public class WeaponSwitching : MonoBehaviour {
 
     private void Start() {
 
-        SetWeapons();
+        //SetWeapons();
         Select(selectedWeapon);
 
         timeSinceLastSwitch = 0f;
 
     }
 
-    private void SetWeapons() {
+    private void SetWeapons(){
 
         weapons = new Transform[transform.childCount];
 
@@ -40,20 +40,6 @@ public class WeaponSwitching : MonoBehaviour {
     private void Update() {
 
         int previousSelectedWeapon = selectedWeapon;
-
-        /*
-        for (int i = 0; i < keys.Length; i++) {
-
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime) {
-
-                selectedWeapon = i;
-
-            }
-
-        }
-
-        if (previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
-        */
         if (_input.weaponSwap >= 1 || _input.weaponSwap <= -1)
         {
             if (selectedWeapon == 0)

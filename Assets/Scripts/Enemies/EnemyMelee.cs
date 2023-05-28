@@ -6,11 +6,12 @@ using UnityEngine.AI;
 
 public class EnemyMelee : MonoBehaviour {
 
-    public Transform playerTransform;
+    private Transform playerTransform;
+    private NavMeshAgent navMeshAgent;
 
     public int enemyChanceSpawn;
 
-    public NavMeshAgent navMeshAgent;
+    [Header("Movement")]
     public float timeBetweenHit = 0.5f;
     public float startWaitTime = 4;
     public float timeToRotate = 2;
@@ -33,34 +34,32 @@ public class EnemyMelee : MonoBehaviour {
     public int enemyDamage;
     float timeSinceLastHit;
 
+    [Header("Path")]
     public Transform[] waypoints;
-    int _currentWaypointIndex;
+    private int _currentWaypointIndex;
 
-    Vector3 playerLastPos = Vector3.zero;
-    Vector3 _playerPos;
+    private Vector3 playerLastPos = Vector3.zero;
+    private Vector3 _playerPos;
 
-    float _waitTime;
-    float _timeToRotate;
-    bool _playerInRange;
-    bool _playerNear;
-    bool _isPatrol;
-    bool _caughtPlayer;
+    private float _waitTime;
+    private float _timeToRotate;
+    private bool _playerInRange = false;
+    private bool _playerNear = false;
+    private bool _isPatrol = true;
+    private bool _caughtPlayer = false;
 
+    [Header("Animator")]
+    public Animator _animator;
 
     void Start() {
 
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameManager.instance.Player.transform;
+        navMeshAgent = GetComponent<NavMeshAgent>();
 
-        _playerPos = Vector3.zero;
-        _isPatrol = true;
-        _caughtPlayer = false;
-        _playerInRange = false;
-        _playerNear = false;
         _waitTime = startWaitTime;
         _timeToRotate = timeToRotate;
 
         _currentWaypointIndex = 0;
-        navMeshAgent = GetComponent<NavMeshAgent>();
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;
@@ -75,13 +74,11 @@ public class EnemyMelee : MonoBehaviour {
         EnviromentView();
 
         if (!_isPatrol) {
-
             Chasing();
-
-            transform.LookAt(playerTransform);
+            Vector3 targetpos = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
+            transform.LookAt(targetpos);
 
         } else {
-
             Patroling();
 
         }
@@ -219,12 +216,21 @@ public class EnemyMelee : MonoBehaviour {
 
     void Move(float speed) {
 
+        _animator.SetBool("Walk", true);
+        _animator.SetBool("Run", false);
+
+        if (speed == speedRun)
+            _animator.SetBool("Run", true);
+        
+        
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
 
     }
 
     void Stop() {
+        _animator.SetBool("Walk", false);
+        _animator.SetBool("Run", false);
 
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
@@ -299,6 +305,8 @@ public class EnemyMelee : MonoBehaviour {
     }
 
     private bool CanHit() {
+
+        _animator.SetTrigger("Attack");
 
         if (timeSinceLastHit < timeBetweenHit) {
 

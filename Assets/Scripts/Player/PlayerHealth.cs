@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : HealthManager, HealthInterface
+public class PlayerHealth : HealthManager
 {
+    [Header("UI")]
     [SerializeField] Healthbar _healthbar;
-    [SerializeField] Shieldbar _shieldbar;
+    [SerializeField] Healthbar _shieldbar;
 
+    [Header("Inventory")]
     public List<ItemStack> itemList = new List<ItemStack>();
 
-    public PlayerHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth)
+    public PlayerHealth(float health, float maxHealth, float shield, float maxShield) : base(health, maxHealth, shield, maxShield)
     {
         _currentHealth = health;
         _currentMaxHealth = maxHealth;
@@ -30,17 +32,21 @@ public class PlayerHealth : HealthManager, HealthInterface
     public override void Update()
     {
         base.Update();
-        _healthbar.SetHealth(Health);
-        _healthbar.SetMaxHealth(MaxHealth);
+        _healthbar.SetCurrent(Health);
+        _healthbar.SetMax(MaxHealth);
 
-        _shieldbar.SetShield(Shield);
-        _shieldbar.SetMaxShield(MaxShield);
+        _shieldbar.SetCurrent(Shield);
+        _shieldbar.SetMax(MaxShield);
 
     }
 
+    public override void Damage(float damageAmount)
+    {
+        DamageShield(damageAmount);
+    }
     public override void OnDeath()
     {
-        Debug.Log("Dead");
+        GameManager.instance.DeathMenu();
     }
 
     IEnumerator CallItemUpdate()
